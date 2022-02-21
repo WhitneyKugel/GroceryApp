@@ -10,6 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryShoppingApp">
         <activity
+            android:name=".CreateMealActivity"
+            android:exported="true"
+            android:label="Create Meal"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".MakeListActivity"
+            android:exported="true"
+            android:label="Make List"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
