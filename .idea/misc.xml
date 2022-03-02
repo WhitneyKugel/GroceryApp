@@ -4,14 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3962962962962963" />
-        <entry key="app/src/main/res/layout/activity_create_meal.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_create_meal.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.49773550724637683" />
         <entry key="app/src/main/res/layout/activity_make_list.xml" value="0.23076923076923078" />
         <entry key="app/src/main/res/layout/activity_view_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/grocery_list_item.xml" value="0.3052536231884058" />
-        <entry key="app/src/main/res/menu/menu_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/content_make_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/grocery_list_item.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.33" />
       </map>
     </option>
   </component>

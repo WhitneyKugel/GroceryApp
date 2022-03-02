@@ -27,8 +27,6 @@ public class MakeListActivity extends AppCompatActivity {
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
