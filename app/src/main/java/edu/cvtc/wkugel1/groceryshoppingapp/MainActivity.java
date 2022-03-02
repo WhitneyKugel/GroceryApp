@@ -35,4 +35,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void launchViewListsActivity(View view) {
+
+        Intent intent = new Intent(this, ViewListActivity.class);
+        startActivity(intent);
+
+    }
 }

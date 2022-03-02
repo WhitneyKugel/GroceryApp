@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.cvtc.wkugel1.groceryshoppingapp">
+    package="edu.cvtc.wkugel1.groceryshoppingapp" >
 
     <application
         android:allowBackup="true"
@@ -8,23 +8,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GroceryShoppingApp">
+        android:theme="@style/Theme.GroceryShoppingApp" >
         <activity
             android:name=".ViewListActivity"
             android:exported="true"
             android:label="View List"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-
         <activity
             android:name=".CreateMealActivity"
             android:exported="true"
             android:label="Create Meal"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -33,14 +31,14 @@
             android:name=".MakeListActivity"
             android:exported="true"
             android:label="Make List"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

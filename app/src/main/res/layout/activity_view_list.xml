@@ -7,7 +7,7 @@
     tools:context=".ViewListActivity">
 
     <TextView
-        android:id="@+id/make_list_header"
+        android:id="@+id/view_list_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View List"
@@ -25,7 +25,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/make_list_header">
+        app:layout_constraintTop_toBottomOf="@+id/view_list_header">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,42 +38,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Item"
+                android:layout_weight="1"
                 android:textSize="20sp"/>
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:layout_weight=".25"/>
 
             <TextView
                 android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Qty"
+                android:layout_weight="1"
                 android:textSize="20sp" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:layout_weight=".25"/>
 
             <TextView
                 android:id="@+id/aisle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aisle"
+                android:layout_weight="1"
                 android:textSize="20sp"/>
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:layout_weight=".25"/>
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price"
+                android:layout_weight="1"
                 android:textSize="20sp" />
 
         </LinearLayout>
