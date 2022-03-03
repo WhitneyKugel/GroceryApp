@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.LinkedList;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 
@@ -18,7 +23,9 @@ public class MakeListActivity extends AppCompatActivity {
     private final LinkedList<String> mGroceryList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private GroceryListAdapter mAdapter;
-
+    private TextView mNewItem;
+    private FloatingActionButton mFAB;
+    private FloatingActionButton mAddButtonFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,15 @@ public class MakeListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int wordListSize = mGroceryList.size();
 
+                mNewItem = findViewById(R.id.addItemText);
+                mNewItem.setVisibility(View.VISIBLE);
+
+                mFAB = findViewById(R.id.fab);
+                mFAB.setVisibility(View.INVISIBLE);
+
+                mAddButtonFAB = findViewById(R.id.add_item_FAB);
+                mAddButtonFAB.setVisibility(View.VISIBLE);
+
                 // Add a new word to the wordList.
                 mGroceryList.addLast("+ Word " + wordListSize);
 
@@ -42,11 +58,6 @@ public class MakeListActivity extends AppCompatActivity {
                 mRecyclerView.smoothScrollToPosition(wordListSize);
             }
         });
-
-        // Put initial data into the word list.
-        for (int i = 0; i < 20; i++) {
-            mGroceryList.addLast("Word " + i);
-        }
 
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.recyclerview);

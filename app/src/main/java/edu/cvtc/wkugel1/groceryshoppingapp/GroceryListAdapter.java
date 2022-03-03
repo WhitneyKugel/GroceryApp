@@ -20,7 +20,8 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
         public final TextView wordItemView;
         final GroceryListAdapter mAdapter;
-
+        // Check is item is checked
+        boolean checked = false;
 
         public WordViewHolder(View itemView, GroceryListAdapter adapter) {
             super(itemView);
@@ -38,7 +39,14 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
             String element = mGroceryList.get(mPosition);
 
             // Change the word in the mWordList.
-            mGroceryList.set(mPosition, "Clicked! " + element);
+            if (!checked) {
+                mGroceryList.set(mPosition, "Checked! " + mPosition);
+                checked = true;
+            } else {
+                mGroceryList.set(mPosition, "Unclicked! " + mPosition);
+                checked = false;
+            }
+
 
             // Notify the adapter, that the data has changed so it can
             // update the RecyclerView to display the data.
