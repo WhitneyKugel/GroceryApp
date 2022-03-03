@@ -23,6 +23,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
+        android:keyboardNavigationCluster="false"
         app:srcCompat="@drawable/ic_add_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,17 +43,21 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_item_FAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:keyboardNavigationCluster="false"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_item_FAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:layout_anchor="@+id/fab"
-        app:layout_anchorGravity="center"
-        app:srcCompat="@android:drawable/ic_media_play" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

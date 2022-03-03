@@ -20,6 +20,7 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
         public final TextView wordItemView;
         final GroceryListAdapter mAdapter;
+
         // Check is item is checked
         boolean checked = false;
 
@@ -40,10 +41,10 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
             // Change the word in the mWordList.
             if (!checked) {
-                mGroceryList.set(mPosition, "Checked! " + mPosition);
+                mGroceryList.set(mPosition, element);
                 checked = true;
             } else {
-                mGroceryList.set(mPosition, "Unclicked! " + mPosition);
+                mGroceryList.set(mPosition, element);
                 checked = false;
             }
 

@@ -1,9 +1,11 @@
 package edu.cvtc.wkugel1.groceryshoppingapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +25,14 @@ public class MakeListActivity extends AppCompatActivity {
     private final LinkedList<String> mGroceryList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private GroceryListAdapter mAdapter;
-    private TextView mNewItem;
+    private TextView mNewItemText;
     private FloatingActionButton mFAB;
-    private FloatingActionButton mAddButtonFAB;
+    private FloatingActionButton mAddItemFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -38,24 +41,49 @@ public class MakeListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int wordListSize = mGroceryList.size();
-
-                mNewItem = findViewById(R.id.addItemText);
-                mNewItem.setVisibility(View.VISIBLE);
-
+                mAddItemFAB = findViewById(R.id.add_item_FAB);
+                mNewItemText = findViewById(R.id.addItemText);
                 mFAB = findViewById(R.id.fab);
+
+                mNewItemText.setVisibility(View.VISIBLE);
+
                 mFAB.setVisibility(View.INVISIBLE);
 
-                mAddButtonFAB = findViewById(R.id.add_item_FAB);
-                mAddButtonFAB.setVisibility(View.VISIBLE);
+                mAddItemFAB.setVisibility(View.VISIBLE);
+
+                mNewItemText.setText("");
+
+//                // Add a new word to the wordList.
+//                mGroceryList.addLast("+ Word " + wordListSize);
+
+//                // Notify the adapter, that the data has changed.
+//                mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
+
+                // Scroll to the bottom.
+                mRecyclerView.smoothScrollToPosition(wordListSize);
+            }
+        });
+
+        // Add entered item to list
+        binding.addItemFAB.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                int wordListSize = mGroceryList.size();
 
                 // Add a new word to the wordList.
-                mGroceryList.addLast("+ Word " + wordListSize);
+                mGroceryList.addLast(mNewItemText.getText().toString());
 
                 // Notify the adapter, that the data has changed.
                 mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
 
-                // Scroll to the bottom.
-                mRecyclerView.smoothScrollToPosition(wordListSize);
+                mNewItemText.setVisibility(View.INVISIBLE);
+                mFAB.setVisibility(View.VISIBLE);
+                mAddItemFAB.setVisibility(View.INVISIBLE);
+
+
+
             }
         });
 
