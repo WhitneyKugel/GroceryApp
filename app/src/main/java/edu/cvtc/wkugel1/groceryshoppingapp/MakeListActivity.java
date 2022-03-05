@@ -1,103 +1,91 @@
 package edu.cvtc.wkugel1.groceryshoppingapp;
 
-import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
+
+import android.view.View;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.LinkedList;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 
-public class MakeListActivity extends AppCompatActivity {
+import android.view.Menu;
+import android.view.MenuItem;
 
-    private AppBarConfiguration appBarConfiguration;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+public class MakeListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityMakeListBinding binding;
-    private final LinkedList<String> mGroceryList = new LinkedList<>();
-    private RecyclerView mRecyclerView;
-    private GroceryListAdapter mAdapter;
-    private TextView mNewItemText;
-    private FloatingActionButton mFAB;
-    private FloatingActionButton mAddItemFAB;
+
+    // Constants
+    public static final int LOADER_GROCERY_ITEMS = 0;
+
+    // Member variables
+    private GroceryItemsOpenHelper mDbOpenHelper;
+    private RecyclerView mRecyclerItems;
+    private LinearLayoutManager mCoursesLayoutManager;
+    private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
+
+    private boolean mIsCreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        setContentView(R.layout.content_make_list);
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//
+//        setSupportActionBar(binding.toolbar);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        mDbOpenHelper = new GroceryItemsOpenHelper(this);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int wordListSize = mGroceryList.size();
-                mAddItemFAB = findViewById(R.id.add_item_FAB);
-                mNewItemText = findViewById(R.id.addItemText);
-                mFAB = findViewById(R.id.fab);
-
-                mNewItemText.setVisibility(View.VISIBLE);
-
-                mFAB.setVisibility(View.INVISIBLE);
-
-                mAddItemFAB.setVisibility(View.VISIBLE);
-
-                mNewItemText.setText("");
-
-//                // Add a new word to the wordList.
-//                mGroceryList.addLast("+ Word " + wordListSize);
-
-//                // Notify the adapter, that the data has changed.
-//                mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
-
-                // Scroll to the bottom.
-                mRecyclerView.smoothScrollToPosition(wordListSize);
+                startActivity(new Intent(MakeListActivity.this, GroceryActivity.class));
             }
         });
 
-        // Add entered item to list
-        binding.addItemFAB.setOnClickListener(new View.OnClickListener() {
+        initializeDisplayContent();
+    }
 
-            @Override
-            public void onClick(View view) {
+    private void initializeDisplayContent() {
+        // Retrieve the information from your database
+        DataManager.loadFromDatabase(mDbOpenHelper);
 
-                int wordListSize = mGroceryList.size();
+        // Set a reference to your list of items layout
+        mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
+        mCoursesLayoutManager = new LinearLayoutManager(this);
 
-                // Add a new word to the wordList.
-                mGroceryList.addLast(mNewItemText.getText().toString());
+        // Get your grocery items
+        List<GroceryItemInfo> items = DataManager.getInstance().getCourses();
 
-                // Notify the adapter, that the data has changed.
-                mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
+        // We do not have a cursor yet, so pass null.
+        mGroceryRecyclerAdapter = new GroceryRecyclerAdapter(this, null);
 
-                mNewItemText.setVisibility(View.INVISIBLE);
-                mFAB.setVisibility(View.VISIBLE);
-                mAddItemFAB.setVisibility(View.INVISIBLE);
+        // Display the courses
+        displayCourses();
+    }
 
 
-
-            }
-        });
-
-        // Get a handle to the RecyclerView.
-        mRecyclerView = findViewById(R.id.recyclerview);
-
-        // Create an adapter and supply the data to be displayed.
-        mAdapter = new GroceryListAdapter(this, mGroceryList);
-
-        // Connect the adapter with the RecyclerView.
-        mRecyclerView.setAdapter(mAdapter);
-
-        // Give the RecyclerView a default layout manager.
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    private void displayCourses() {
+        mRecyclerItems.setLayoutManager(mCoursesLayoutManager);
+        mRecyclerItems.setAdapter(mGroceryRecyclerAdapter);
     }
 
     @Override
@@ -121,5 +109,94 @@ public class MakeListActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        mDbOpenHelper.close();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Use restartLoader instead of initLoader to make sure you re-query the database
+        // each time the activity is loaded in the app.
+        LoaderManager.getInstance(this).restartLoader(LOADER_GROCERY_ITEMS, null, this);
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        // Create new cursor loader
+        CursorLoader loader = null;
+
+        if (id == LOADER_GROCERY_ITEMS) {
+            loader = new CursorLoader(this) {
+                @Override
+                public Cursor loadInBackground() {
+                    mIsCreated = true;
+
+                    // Open your database in read mode.
+                    SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
+
+                    // Create a list of columns you want to return.
+                    String[] courseColumns = {
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                            GroceryItemInfoEntry._ID
+                    };
+
+                    // Create an order by field for sorting purposes.
+                    String courseOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+
+                    // Populate your cursor with the results of the query.
+                    return db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
+                            null, null, null, null, courseOrderBy);
+
+                }
+            };
+        }
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        if (loader.getId() == LOADER_GROCERY_ITEMS && mIsCreated) {
+            // Associate the cursor with your RecyclerAdapter
+            mGroceryRecyclerAdapter.changeCursor(data);
+            mIsCreated = false;
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        if (loader.getId() == LOADER_GROCERY_ITEMS) {
+            // Change the cursor to null (cleanup)
+            mGroceryRecyclerAdapter.changeCursor(null);
+        }
+    }
+
+    private void loadCourses() {
+        // Open your database in read mode.
+        SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
+
+        // Create a list of columns you want to return.
+        String[] courseColumns = {
+                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
+                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                GroceryItemInfoEntry._ID
+        };
+
+        // Create an order by field for sorting purposes.
+        String courseOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+
+        // Populate your cursor with the results of the query.
+        final Cursor courseCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
+                null, null, null, null, courseOrderBy);
+
+        // Associate the cursor with your RecyclerAdapter
+        mGroceryRecyclerAdapter.changeCursor(courseCursor);
+    }
+
 
 }
