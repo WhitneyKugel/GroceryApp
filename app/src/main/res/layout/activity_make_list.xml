@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MakeListActivity">
 
-
-
     <include layout="@layout/content_make_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

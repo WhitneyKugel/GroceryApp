@@ -127,7 +127,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mGroceryItemId = (int)db.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
     }
 
-    private void saveCourseToDatabase(String courseTitle, String courseDescription) {
+    private void saveGroceryItemToDatabase(String courseTitle, String courseDescription) {
         // Create selection criteria
         String selection = GroceryItemInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mGroceryItemId)};
@@ -159,14 +159,15 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mGroceryItem.setDescription(mOriginalGroceryCost);
     }
 
-    private void saveCourse() {
+    private void saveGroceryItem() {
         // Get the values from the layout
         String courseTitle = mTextGroceryItem.getText().toString();
         String courseDescription = mTextGroceryCost.getText().toString();
 
         // Call the method to write to the database
-        saveCourseToDatabase(courseTitle, courseDescription);
+        saveGroceryItemToDatabase(courseTitle, courseDescription);
     }
+
 
     private void deleteCourseFromDatabase() {
         // Create selection criteria
@@ -238,11 +239,11 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         // Check to see if this is your cursor for your loader
         if (loader.getId() == LOADER_GROCERY_ITEMS) {
-            loadFinishedCourses(data);
+            loadFinishedGroceryItems(data);
         }
     }
 
-    private void loadFinishedCourses(Cursor data) {
+    private void loadFinishedGroceryItems(Cursor data) {
         // Populate your member cursor with the data.
         mGroceryItemCursor = data;
 
@@ -290,6 +291,12 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
             finish();
         }
 
+        if (id == R.id.action_delete) {
+            mIsCancelling = true;
+            deleteCourseFromDatabase();
+            finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -308,7 +315,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
             }
         } else {
             // Save the data when leaving the activity.
-            saveCourse();
+            saveGroceryItem();
         }
     }
 
