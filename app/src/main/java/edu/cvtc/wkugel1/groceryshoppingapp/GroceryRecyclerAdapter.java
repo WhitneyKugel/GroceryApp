@@ -96,8 +96,8 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mGroceryItem = (TextView) itemView.findViewById(R.id.text_grocery_item);
-            mGroceryCost = (TextView) itemView.findViewById(R.id.text_cost);
+            mGroceryItem = (TextView) itemView.findViewById(R.id.grocery_item_title);
+            mGroceryCost = (TextView) itemView.findViewById(R.id.item_cost);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

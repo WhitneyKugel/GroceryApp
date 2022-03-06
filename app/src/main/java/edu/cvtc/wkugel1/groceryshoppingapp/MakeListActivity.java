@@ -44,7 +44,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.content_make_list);
+        setContentView(R.layout.content_make_list);
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

@@ -15,4 +15,5 @@
     <string name="item_text">Item</string>
     <string name="cost_text">Cost</string>
     <string name="menu_cancel_text">Cancel</string>
+    <string name="view_grocery_item_label">View Grocery Item</string>
 </resources>
