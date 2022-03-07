@@ -20,4 +20,9 @@ public class GroceryItemDatabaseContract {
                 COLUMN_GROCERY_ITEM_COST + " TEXT, " + COLUMN_GROCERY_ITEM_AISLE + " TEXT)";
     }
 
+//    public static final class MealPlannerInfoEntry implements BaseColumns {
+//        public static final String TABLE_NAME = "grocery_info";
+//        public static final String COLUMN_MEAL_NAME = "meal_name";
+//    }
+
 }
