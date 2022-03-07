@@ -31,6 +31,7 @@ public class DataManager {
         // so you want to use your constants to reference where those positions are in the table.
         int listGroceryItemPosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
         int listCostPosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
+        int listAislePosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
         int idPosition = cursor.getColumnIndex(GroceryItemInfoEntry._ID);
 
         // Create an instance of your DataManager and use the DataManager
@@ -43,9 +44,10 @@ public class DataManager {
         while (cursor.moveToNext()) {
             String listGroceryItem = cursor.getString(listGroceryItemPosition);
             String listCost = cursor.getString(listCostPosition);
+            String listAisle = cursor.getString(listAislePosition);
             int id = cursor.getInt(idPosition);
 
-            GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost);
+            GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle);
 
             dm.mGroceryItems.add(list);
         }
@@ -63,6 +65,7 @@ public class DataManager {
         String[] groceryItemColumns = {
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
                 GroceryItemInfoEntry._ID};
 
         // Create an order by field for sorting purposes.
@@ -80,7 +83,7 @@ public class DataManager {
         // Create an empty course object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
         // size of the new course array list.
-        GroceryItemInfo course = new GroceryItemInfo(null, null);
+        GroceryItemInfo course = new GroceryItemInfo(null, null, null);
         mGroceryItems.add(course);
         return mGroceryItems.size();
     }

@@ -16,4 +16,11 @@
     <string name="cost_text">Cost</string>
     <string name="menu_cancel_text">Cancel</string>
     <string name="view_grocery_item_label">View Grocery Item</string>
+    <string name="aisle_text">Aisle</string>
+    <string name="add_checkbox_text">Add</string>
+    <string name="aisle_hint">Aisle</string>
+    <string name="make_list_text">Items</string>
+    <string name="create_meal_text">Create Meal</string>
+    <string name="view_lists_text">View Lists</string>
+    <string name="make_list">Make List</string>
 </resources>

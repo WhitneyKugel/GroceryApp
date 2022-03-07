@@ -20,13 +20,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/make_list_button"
+        android:id="@+id/items_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="44dp"
         android:onClick="launchMakeListActivity"
-        android:text="Make List"
+        android:text="@string/make_list_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -37,10 +37,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:onClick="launchCreateMealActivity"
-        android:text="Create Meal"
+        android:text="@string/create_meal_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.361"
-        app:layout_constraintStart_toEndOf="@+id/make_list_button"
+        app:layout_constraintStart_toEndOf="@+id/items_button"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
@@ -48,9 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:text="View Lists"
+        android:text="@string/view_lists_text"
         android:onClick="launchViewListsActivity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/make_list_button" />
+        app:layout_constraintTop_toBottomOf="@+id/items_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

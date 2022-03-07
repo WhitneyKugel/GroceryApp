@@ -26,11 +26,12 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     public static final String GROCERY_ITEM_ID = "edu.cvtc.wkugel1.groceryshoppingapp.GROCERY_ITEM_ID";
     public static final String COLUMN_GROCERY_ITEM = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM";
     public static final String COLUMN_GROCERY_ITEM_COST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_COST";
+    public static final String COLUMN_GROCERY_ITEM_AISLE = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_AISLE";
     private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Initialize new CourseInfo to empty
-    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "");
+    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
 
     // Member variables
     private boolean mIsNewGroceryItem;
@@ -38,12 +39,15 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private int mGroceryItemId;
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
+    private int mGroceryItemAislePosition;
     private String mOriginalGroceryItem;
     private String mOriginalGroceryCost;
+    private String mOriginalGroceryAisle;
 
     // Member objects
     private EditText mTextGroceryItem;
     private EditText mTextGroceryCost;
+    private EditText mTextGroceryAisle;
     private GroceryItemsOpenHelper mDbOpenHelper;
     private Cursor mGroceryItemCursor;
 
@@ -65,6 +69,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
 
         mTextGroceryItem = findViewById(R.id.text_grocery_item);
         mTextGroceryCost = findViewById(R.id.text_cost);
+        mTextGroceryAisle = findViewById(R.id.text_aisle);
+
 
         // If it is not a new course, load the course data into the layout
         if (!mIsNewGroceryItem) {
@@ -74,12 +80,14 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
 
     private void displayCourse() {
         // Retrieve the values from the cursor based upon the position of the columns.
-        String courseTitle = mGroceryItemCursor.getString(mGroceryItemPosition);
-        String courseDescription = mGroceryItemCursor.getString(mGroceryItemCostPosition);
+        String groceryItem = mGroceryItemCursor.getString(mGroceryItemPosition);
+        String groceryItemCost = mGroceryItemCursor.getString(mGroceryItemCostPosition);
+        String groceryItemAisle = mGroceryItemCursor.getString(mGroceryItemAislePosition);
 
         // Use the information to populate the layout.
-        mTextGroceryItem.setText(courseTitle);
-        mTextGroceryCost.setText(courseDescription);
+        mTextGroceryItem.setText(groceryItem);
+        mTextGroceryCost.setText(groceryItemCost);
+        mTextGroceryAisle.setText(groceryItemAisle);
     }
 
     private void saveOriginalCourseValues() {
@@ -87,6 +95,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         if (!mIsNewGroceryItem) {
             mOriginalGroceryItem = mGroceryItem.getTitle();
             mOriginalGroceryCost = mGroceryItem.getDescription();
+            mOriginalGroceryAisle = mGroceryItem.getAisle();
         }
     }
 
@@ -94,6 +103,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Get the original values from the savedInstanceState
         mOriginalGroceryItem = savedInstanceState.getString(COLUMN_GROCERY_ITEM);
         mOriginalGroceryCost = savedInstanceState.getString(COLUMN_GROCERY_ITEM_COST);
+        mOriginalGroceryAisle = savedInstanceState.getString(COLUMN_GROCERY_ITEM_AISLE);
     }
 
     private void readDisplayStateValues() {
@@ -118,6 +128,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // so we set the columns to empty strings.
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, "");
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, "");
+        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE, "");
 
         // Get connection to the database. Use the writable method since we are changing the data.
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
@@ -127,15 +138,16 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mGroceryItemId = (int)db.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
     }
 
-    private void saveGroceryItemToDatabase(String courseTitle, String courseDescription) {
+    private void saveGroceryItemToDatabase(String groceryItem, String groceryItemCost, String groceryItemAisle) {
         // Create selection criteria
         String selection = GroceryItemInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mGroceryItemId)};
 
         // Use a ContentValues object to put our information into.
         ContentValues values = new ContentValues();
-        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, courseTitle);
-        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, courseDescription);
+        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, groceryItem);
+        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, groceryItemCost);
+        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE, groceryItemAisle);
 
         AsyncTaskLoader<String> task = new AsyncTaskLoader<String>(this) {
             @Nullable
@@ -157,15 +169,17 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private void storePreviousCourseValues() {
         mGroceryItem.setTitle(mOriginalGroceryItem);
         mGroceryItem.setDescription(mOriginalGroceryCost);
+        mGroceryItem.setAisle(mOriginalGroceryAisle);
     }
 
     private void saveGroceryItem() {
         // Get the values from the layout
-        String courseTitle = mTextGroceryItem.getText().toString();
-        String courseDescription = mTextGroceryCost.getText().toString();
+        String groceryItem = mTextGroceryItem.getText().toString();
+        String groceryItemCost = mTextGroceryCost.getText().toString();
+        String groceryItemAisle = mTextGroceryAisle.getText().toString();
 
         // Call the method to write to the database
-        saveGroceryItemToDatabase(courseTitle, courseDescription);
+        saveGroceryItemToDatabase(groceryItem, groceryItemCost, groceryItemAisle);
     }
 
 
@@ -224,7 +238,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
                 // Create a list of the columns you are pulling from the database
                 String[] courseColumns = {
                         GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
-                        GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST
+                        GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                        GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE
                 };
 
                 // Fill your cursor with the information you have provided.
@@ -251,6 +266,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // you are able to retrieve them into your layout
         mGroceryItemPosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
         mGroceryItemCostPosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
+        mGroceryItemAislePosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
 
         // Make sure that you have moved to the correct record.
         // The cursor will not have populated any of the

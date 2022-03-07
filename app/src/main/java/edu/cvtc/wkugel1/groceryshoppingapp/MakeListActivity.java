@@ -22,6 +22,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -143,6 +144,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
                     String[] courseColumns = {
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
                             GroceryItemInfoEntry._ID
                     };
 
@@ -184,6 +186,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         String[] courseColumns = {
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
                 GroceryItemInfoEntry._ID
         };
 
@@ -191,12 +194,31 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         String courseOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
 
         // Populate your cursor with the results of the query.
-        final Cursor courseCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
+        final Cursor groceryItemCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
                 null, null, null, null, courseOrderBy);
 
         // Associate the cursor with your RecyclerAdapter
-        mGroceryRecyclerAdapter.changeCursor(courseCursor);
+        mGroceryRecyclerAdapter.changeCursor(groceryItemCursor);
     }
 
 
+    public void onCheckBoxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Add or remove from shopping list.
+        if (checked) {
+            // Add item to shopping list
+            System.out.println(view);
+        } else {
+            // Remove item from shopping list
+
+        }
+
+    }
+
+
+    public void makeList(View view) {
+
+    }
 }

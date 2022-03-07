@@ -8,18 +8,21 @@ public class GroceryItemInfo implements Parcelable{
     // Member Attributes
     private String mGroceryItem;
     private String mCost;
+    private String mAisle;
     private int mId;
 
     // Overload Constructors
-    public GroceryItemInfo(String item, String cost) {
+    public GroceryItemInfo(String item, String cost, String aisle) {
         mGroceryItem = item;
         mCost = cost;
+        mAisle = aisle;
     }
 
-    public GroceryItemInfo(int id, String item, String cost) {
+    public GroceryItemInfo(int id, String item, String cost, String aisle) {
         mId = id;
         mGroceryItem = item;
         mCost = cost;
+        mAisle = aisle;
     }
 
     // Getters and Setters
@@ -35,6 +38,8 @@ public class GroceryItemInfo implements Parcelable{
         return mCost;
     }
 
+    public String getAisle() { return mAisle; }
+
     public void setTitle(String title) {
         mGroceryItem = title;
     }
@@ -42,6 +47,8 @@ public class GroceryItemInfo implements Parcelable{
     public void setDescription(String description) {
         mCost = description;
     }
+
+    public void setAisle(String aisle) { mAisle = aisle; }
 
     private String getCompareKey() {
         return mGroceryItem + "|" + mCost;
@@ -68,12 +75,14 @@ public class GroceryItemInfo implements Parcelable{
     protected GroceryItemInfo(Parcel parcel) {
         mGroceryItem = parcel.readString();
         mCost = parcel.readString();
+        mAisle = parcel.readString();
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(mGroceryItem);
         parcel.writeString(mCost);
+        parcel.writeString(mAisle);
     }
 
     @Override

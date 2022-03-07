@@ -37,6 +37,20 @@
         app:layout_constraintStart_toStartOf="@+id/text_grocery_item"
         app:layout_constraintTop_toBottomOf="@+id/text_grocery_item" />
 
+    <EditText
+        android:id="@+id/text_aisle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/aisle_hint"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/text_cost"
+        app:layout_constraintStart_toStartOf="@+id/text_cost"
+        app:layout_constraintTop_toBottomOf="@+id/text_cost" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout >
