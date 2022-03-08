@@ -24,4 +24,5 @@
     <string name="view_lists_text">View Lists</string>
     <string name="make_list">Make List</string>
     <string name="menu_option_text">Menu Option</string>
+    <string name="meal_item_hint">Meal item</string>
 </resources>
