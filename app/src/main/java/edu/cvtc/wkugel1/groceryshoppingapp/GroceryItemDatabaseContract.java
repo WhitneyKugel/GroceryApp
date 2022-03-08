@@ -20,9 +20,17 @@ public class GroceryItemDatabaseContract {
                 COLUMN_GROCERY_ITEM_COST + " TEXT, " + COLUMN_GROCERY_ITEM_AISLE + " TEXT)";
     }
 
-//    public static final class MealPlannerInfoEntry implements BaseColumns {
-//        public static final String TABLE_NAME = "grocery_info";
-//        public static final String COLUMN_MEAL_NAME = "meal_name";
-//    }
+    public static final class MealPlannerInfoEntry implements BaseColumns {
+        public static final String TABLE_NAME = "menu_meal_info";
+        public static final String COLUMN_MEAL_NAME = "meal_name";
+
+        public static final String INDEX1 = TABLE_NAME + "_index1";
+        public static final String SQL_CREATE_INDEX1 = "CREATE INDEX " + INDEX1 + " ON " +
+                TABLE_NAME + "(" + COLUMN_MEAL_NAME + ")";
+
+        public static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
+                _ID + " INTEGER PRIMARY KEY, " + COLUMN_MEAL_NAME + " TEXT NOT NULL)";
+
+    }
 
 }

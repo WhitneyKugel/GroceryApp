@@ -20,12 +20,12 @@ public class DataManager {
         return ourInstance;
     }
 
-    // Return a list of your courses
-    public List<GroceryItemInfo> getCourses() {
+    // Return a list of your grocery items
+    public List<GroceryItemInfo> getGroceryItems() {
         return mGroceryItems;
     }
 
-    private static void loadCoursesFromDatabase(Cursor cursor) {
+    private static void loadGroceryItemsFromDatabase(Cursor cursor) {
         // Retrieve the field positions in your database.
         // The positions of fields may change over time as the database grows,
         // so you want to use your constants to reference where those positions are in the table.
@@ -39,7 +39,7 @@ public class DataManager {
         DataManager dm = getInstance();
         dm.mGroceryItems.clear();
 
-        // Loop through the cursor rows and add new course objects to
+        // Loop through the cursor rows and add new grocery item objects to
         // your array list.
         while (cursor.moveToNext()) {
             String listGroceryItem = cursor.getString(listGroceryItemPosition);
@@ -76,15 +76,15 @@ public class DataManager {
                 null, null, null, null, groceryItemOrderBy);
 
         // Call the method to load your array list.
-        loadCoursesFromDatabase(groceryItemCursor);
+        loadGroceryItemsFromDatabase(groceryItemCursor);
     }
 
-    public int createNewCourse() {
-        // Create an empty course object to use on your activity screen
+    public int createNewGroceryItem() {
+        // Create an empty grocery item object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
-        // size of the new course array list.
-        GroceryItemInfo course = new GroceryItemInfo(null, null, null);
-        mGroceryItems.add(course);
+        // size of the new grocery item array list.
+        GroceryItemInfo groceryItem = new GroceryItemInfo(null, null, null);
+        mGroceryItems.add(groceryItem);
         return mGroceryItems.size();
     }
 }

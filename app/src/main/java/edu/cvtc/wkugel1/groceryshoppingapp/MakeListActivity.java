@@ -74,7 +74,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         mCoursesLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
-        List<GroceryItemInfo> items = DataManager.getInstance().getCourses();
+        List<GroceryItemInfo> items = DataManager.getInstance().getGroceryItems();
 
         // We do not have a cursor yet, so pass null.
         mGroceryRecyclerAdapter = new GroceryRecyclerAdapter(this, null);

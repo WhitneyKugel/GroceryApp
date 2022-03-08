@@ -14,7 +14,7 @@ public class GroceryItemsDataWorker {
         mDb = db;
     }
 
-    private void insertCourse(String item, String cost) {
+    private void insertGroceryItem(String item, String cost) {
         ContentValues values = new ContentValues();
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, item);
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, cost);
@@ -22,7 +22,7 @@ public class GroceryItemsDataWorker {
         long newRowId = mDb.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
     }
 
-    public void insertCourses() {
+    public void insertGroceryItems() {
     }
 
 }

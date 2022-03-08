@@ -30,7 +30,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
-    // Initialize new CourseInfo to empty
+    // Initialize new GroceryItemInfo to empty
     private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
 
     // Member variables

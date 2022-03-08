@@ -9,9 +9,11 @@
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.49773550724637683" />
         <entry key="app/src/main/res/layout/activity_make_list.xml" value="0.2808988764044944" />
         <entry key="app/src/main/res/layout/activity_make_list_add_item.xml" value="0.2391304347826087" />
+        <entry key="app/src/main/res/layout/activity_make_menu.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/activity_view_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_make_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/content_menu_item_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/grocery_item_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/grocery_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/menu_item.xml" value="0.5" />
