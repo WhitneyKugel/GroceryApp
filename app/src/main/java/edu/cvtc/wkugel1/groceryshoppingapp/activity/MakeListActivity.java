@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,8 +17,12 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryItemDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
-import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
+import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,14 +71,14 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
     private void initializeDisplayContent() {
         // Retrieve the information from your database
-        DataManager.loadFromDatabase(mDbOpenHelper);
+        GroceryItemDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
         mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
         mCoursesLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
-        List<GroceryItemInfo> items = DataManager.getInstance().getGroceryItems();
+        List<GroceryItemInfo> items = GroceryItemDataManager.getInstance().getGroceryItems();
 
         // We do not have a cursor yet, so pass null.
         mGroceryRecyclerAdapter = new GroceryRecyclerAdapter(this, null);

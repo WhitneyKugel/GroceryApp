@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.managers;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.MenuMealsOpenHelper;
 
 public class MenuDataManager {
     private static MenuDataManager ourInstance = null;

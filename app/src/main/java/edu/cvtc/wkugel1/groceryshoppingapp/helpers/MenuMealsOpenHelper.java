@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.workers.MenuMealsDataWorker;
 
 public class MenuMealsOpenHelper extends SQLiteOpenHelper {
     public MenuMealsOpenHelper(@Nullable Context context) {

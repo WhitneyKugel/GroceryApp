@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+
+import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

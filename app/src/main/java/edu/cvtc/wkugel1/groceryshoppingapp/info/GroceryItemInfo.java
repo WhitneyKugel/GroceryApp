@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.info;
 
 import android.os.Parcel;
 import android.os.Parcelable;

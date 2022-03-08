@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.managers;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 
-public class DataManager {
+public class GroceryItemDataManager {
 
-    private static DataManager ourInstance = null;
+    private static GroceryItemDataManager ourInstance = null;
     private List<GroceryItemInfo> mGroceryItems = new ArrayList<>();
 
-    public static DataManager getInstance() {
+    public static GroceryItemDataManager getInstance() {
         if (ourInstance == null) {
-            ourInstance = new DataManager();
+            ourInstance = new GroceryItemDataManager();
         }
         return ourInstance;
     }
@@ -36,7 +38,7 @@ public class DataManager {
 
         // Create an instance of your DataManager and use the DataManager
         // to clear any information from the array list.
-        DataManager dm = getInstance();
+        GroceryItemDataManager dm = getInstance();
         dm.mGroceryItems.clear();
 
         // Loop through the cursor rows and add new grocery item objects to

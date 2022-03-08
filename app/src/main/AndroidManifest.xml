@@ -10,40 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryShoppingApp" >
         <activity
-            android:name=".ViewListActivity"
+            android:name=".activity.ViewListActivity"
             android:exported="true"
             android:label="View List"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".GroceryActivity"
+            android:name=".activity.GroceryActivity"
             android:label="@string/view_grocery_item_label"
-            android:parentActivityName=".MakeListActivity" />
+            android:parentActivityName=".activity.MakeListActivity" />
 
         <activity
-            android:name=".CreateMealActivity"
+            android:name=".activity.CreateMealActivity"
             android:exported="true"
             android:label="Create Meal"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".MakeListActivity"
+            android:name=".activity.MakeListActivity"
             android:exported="true"
             android:label="Make List"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.GroceryShoppingApp.NoActionBar">

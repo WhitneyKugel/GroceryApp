@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.workers;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;

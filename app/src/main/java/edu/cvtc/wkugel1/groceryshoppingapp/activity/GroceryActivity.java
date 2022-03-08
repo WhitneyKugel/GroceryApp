@@ -1,4 +1,4 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
 public class GroceryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 

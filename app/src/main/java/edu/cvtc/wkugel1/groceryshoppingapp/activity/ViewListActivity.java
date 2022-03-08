@@ -1,8 +1,10 @@
-package edu.cvtc.wkugel1.groceryshoppingapp;
+package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
 public class ViewListActivity extends AppCompatActivity {
 
