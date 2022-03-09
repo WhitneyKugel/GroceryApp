@@ -42,7 +42,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     // Member variables
     private GroceryItemsOpenHelper mDbOpenHelper;
     private RecyclerView mRecyclerItems;
-    private LinearLayoutManager mCoursesLayoutManager;
+    private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
 
     private boolean mIsCreated = false;
@@ -76,7 +76,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
         // Set a reference to your list of items layout
         mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
-        mCoursesLayoutManager = new LinearLayoutManager(this);
+        mGroceryItemsLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
         List<GroceryItemInfo> items = GroceryItemDataManager.getInstance().getGroceryItems();
@@ -84,13 +84,13 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // We do not have a cursor yet, so pass null.
         mGroceryRecyclerAdapter = new GroceryRecyclerAdapter(this, null);
 
-        // Display the courses
-        displayCourses();
+        // Display the grocery items
+        displayGroceryItems();
     }
 
 
-    private void displayCourses() {
-        mRecyclerItems.setLayoutManager(mCoursesLayoutManager);
+    private void displayGroceryItems() {
+        mRecyclerItems.setLayoutManager(mGroceryItemsLayoutManager);
         mRecyclerItems.setAdapter(mGroceryRecyclerAdapter);
     }
 
@@ -146,7 +146,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
                     SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
 
                     // Create a list of columns you want to return.
-                    String[] courseColumns = {
+                    String[] groceryItemColumns = {
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
@@ -154,11 +154,11 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
                     };
 
                     // Create an order by field for sorting purposes.
-                    String courseOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+                    String groceryItemOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
 
                     // Populate your cursor with the results of the query.
-                    return db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
-                            null, null, null, null, courseOrderBy);
+                    return db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns,
+                            null, null, null, null, groceryItemOrderBy);
 
                 }
             };
@@ -183,12 +183,12 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         }
     }
 
-    private void loadCourses() {
+    private void loadGroceryItems() {
         // Open your database in read mode.
         SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
 
         // Create a list of columns you want to return.
-        String[] courseColumns = {
+        String[] groceryItemsColumns = {
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
@@ -196,11 +196,11 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         };
 
         // Create an order by field for sorting purposes.
-        String courseOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+        String groceryItemsOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
 
         // Populate your cursor with the results of the query.
-        final Cursor groceryItemCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns,
-                null, null, null, null, courseOrderBy);
+        final Cursor groceryItemCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemsColumns,
+                null, null, null, null, groceryItemsOrderBy);
 
         // Associate the cursor with your RecyclerAdapter
         mGroceryRecyclerAdapter.changeCursor(groceryItemCursor);

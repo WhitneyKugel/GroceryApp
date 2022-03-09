@@ -314,9 +314,6 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
             saveMenuMeal();
         }
     }
-
-    public void makeMenu(View view) {
-    }
 }
 
 
