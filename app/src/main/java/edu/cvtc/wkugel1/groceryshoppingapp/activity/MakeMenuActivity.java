@@ -19,7 +19,7 @@ import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
-import edu.cvtc.wkugel1.groceryshoppingapp.helpers.MenuMealsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
@@ -43,16 +43,15 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
 
     // Member objects
     private EditText mTextMenuMeal;
-    private MenuMealsOpenHelper mDbOpenHelper;
+    private GroceryItemsOpenHelper mDbOpenHelper;
     private Cursor mMenuMealCursor;
-    private MenuMealsOpenHelper nDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_menu_list_add_menu_meal);
 
-        nDbOpenHelper = new MenuMealsOpenHelper(this);
+        mDbOpenHelper = new GroceryItemsOpenHelper(this);
 
         readDisplayStateValues();
 

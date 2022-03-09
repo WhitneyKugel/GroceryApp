@@ -25,7 +25,7 @@ import java.util.List;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeMenuBinding;
-import edu.cvtc.wkugel1.groceryshoppingapp.helpers.MenuMealsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.MenuDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
@@ -37,7 +37,7 @@ public class CreateMealActivity extends AppCompatActivity implements LoaderManag
     public static final int LOADER_MENU_MEALS = 0;
 
     // Member variables
-    private MenuMealsOpenHelper mDbOpenHelper;
+    private GroceryItemsOpenHelper mDbOpenHelper;
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mMenusLayoutManager;
     private GroceryRecyclerAdapter mMenuRecyclerAdapter;
@@ -52,7 +52,7 @@ public class CreateMealActivity extends AppCompatActivity implements LoaderManag
         binding = ActivityMakeMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mDbOpenHelper = new MenuMealsOpenHelper(this);
+        mDbOpenHelper = new GroceryItemsOpenHelper(this);
 
         FloatingActionButton fab = findViewById(R.id.menu_fab);
         fab.setOnClickListener(new View.OnClickListener() {

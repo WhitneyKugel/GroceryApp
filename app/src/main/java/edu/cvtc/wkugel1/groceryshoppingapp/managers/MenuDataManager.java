@@ -8,7 +8,7 @@ import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
-import edu.cvtc.wkugel1.groceryshoppingapp.helpers.MenuMealsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 
 public class MenuDataManager {
     private static MenuDataManager ourInstance = null;
@@ -54,7 +54,7 @@ public class MenuDataManager {
 
     }
 
-    public static void loadFromDatabase(MenuMealsOpenHelper dbHelper) {
+    public static void loadFromDatabase(GroceryItemsOpenHelper dbHelper) {
         // Open your database in read mode.
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
