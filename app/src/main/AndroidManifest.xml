@@ -33,6 +33,15 @@
                 android:value=".activity.MainActivity" />
         </activity>
         <activity
+            android:name=".activity.MakeMenuActivity"
+            android:exported="true"
+            android:label="Add Meal"
+            android:parentActivityName=".activity.CreateMealActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".activity.MakeListActivity"
             android:exported="true"
             android:label="Make List"
