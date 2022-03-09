@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MakeMenuActivity">
+    tools:context=".activity.MakeMenuActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,10 +35,10 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
-            android:text="Make Menu"
             android:onClick="makeMenu"
+            android:text="@string/make_menu_text"
             app:layout_constraintBottom_toBottomOf="@+id/include"
-            app:layout_constraintEnd_toStartOf="@+id/fab"
+            app:layout_constraintEnd_toStartOf="@+id/menu_fab"
             app:layout_constraintHorizontal_bias="0.678"
             app:layout_constraintStart_toStartOf="parent" />
 
