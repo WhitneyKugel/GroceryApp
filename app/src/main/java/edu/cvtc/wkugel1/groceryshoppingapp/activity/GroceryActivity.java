@@ -65,9 +65,9 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
 
         // If the bundle is null, save the values. Otherwise restore the original value.
         if (savedInstanceState == null) {
-            saveOriginalCourseValues();
+            saveOriginalGroceryItemValues();
         } else {
-            restoreOriginalCourseValues(savedInstanceState);
+            restoreOriginalGroceryItemValues(savedInstanceState);
         }
 
         mTextGroceryItem = findViewById(R.id.text_grocery_item);
@@ -81,7 +81,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         }
     }
 
-    private void displayCourse() {
+    private void displayGroceryItem() {
         // Retrieve the values from the cursor based upon the position of the columns.
         String groceryItem = mGroceryItemCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mGroceryItemCursor.getString(mGroceryItemCostPosition);
@@ -93,7 +93,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mTextGroceryAisle.setText(groceryItemAisle);
     }
 
-    private void saveOriginalCourseValues() {
+    private void saveOriginalGroceryItemValues() {
         // Only save values if you do not have a new course
         if (!mIsNewGroceryItem) {
             mOriginalGroceryItem = mGroceryItem.getTitle();
@@ -102,7 +102,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         }
     }
 
-    private void restoreOriginalCourseValues(Bundle savedInstanceState) {
+    private void restoreOriginalGroceryItemValues(Bundle savedInstanceState) {
         // Get the original values from the savedInstanceState
         mOriginalGroceryItem = savedInstanceState.getString(COLUMN_GROCERY_ITEM);
         mOriginalGroceryCost = savedInstanceState.getString(COLUMN_GROCERY_ITEM_COST);
@@ -127,7 +127,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Create ContentValues object to hold our fields
         ContentValues values = new ContentValues();
 
-        // For a new course, we don't know what the values will be,
+        // For a new grocery item, we don't know what the values will be,
         // so we set the columns to empty strings.
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, "");
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, "");
@@ -137,7 +137,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
 
         // Insert the new row in the database and assign the new id to our member variable
-        // for course id. Cast the 'long' return value to an int.
+        // for item id. Cast the 'long' return value to an int.
         mGroceryItemId = (int)db.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
     }
 
@@ -169,7 +169,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         task.loadInBackground();
     }
 
-    private void storePreviousCourseValues() {
+    private void storePreviousGroceryItemValues() {
         mGroceryItem.setTitle(mOriginalGroceryItem);
         mGroceryItem.setDescription(mOriginalGroceryCost);
         mGroceryItem.setAisle(mOriginalGroceryAisle);
@@ -186,7 +186,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     }
 
 
-    private void deleteCourseFromDatabase() {
+    private void deleteGroceryItemFromDatabase() {
         // Create selection criteria
         String selection = GroceryItemInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mGroceryItemId)};
@@ -276,8 +276,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // fields until you move it.
         mGroceryItemCursor.moveToNext();
 
-        // Call the method to display the course.
-        displayCourse();
+        // Call the method to display the grocery item.
+        displayGroceryItem();
     }
 
     @Override
@@ -312,7 +312,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
 
         if (id == R.id.action_delete) {
             mIsCancelling = true;
-            deleteCourseFromDatabase();
+            deleteGroceryItemFromDatabase();
             finish();
         }
 
@@ -327,10 +327,10 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
             // Is this a new course?
             if (mIsNewGroceryItem) {
                 // Delete the new course.
-                deleteCourseFromDatabase();
+                deleteGroceryItemFromDatabase();
             } else {
                 // Put the original values on the screen.
-                storePreviousCourseValues();
+                storePreviousGroceryItemValues();
             }
         } else {
             // Save the data when leaving the activity.

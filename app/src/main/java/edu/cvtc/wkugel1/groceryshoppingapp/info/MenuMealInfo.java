@@ -28,7 +28,7 @@ public class MenuMealInfo implements Parcelable{
         return mMenuMeal;
     }
 
-    public void setMenuName(String menuMeal) {
+    public void setMenuMeal(String menuMeal) {
         mMenuMeal = menuMeal;
     }
 

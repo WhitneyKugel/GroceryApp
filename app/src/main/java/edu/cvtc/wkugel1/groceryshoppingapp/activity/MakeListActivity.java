@@ -17,12 +17,13 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.R;
+import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryItemDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
-import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
