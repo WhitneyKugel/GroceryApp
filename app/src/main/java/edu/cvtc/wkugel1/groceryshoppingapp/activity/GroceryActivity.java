@@ -119,11 +119,11 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // If the course id is not set, create a new course
         mIsNewGroceryItem = mGroceryItemId == ID_NOT_SET;
         if (mIsNewGroceryItem) {
-            createNewCourse();
+            createNewGroceryItem();
         }
     }
 
-    private void createNewCourse() {
+    private void createNewGroceryItem() {
         // Create ContentValues object to hold our fields
         ContentValues values = new ContentValues();
 

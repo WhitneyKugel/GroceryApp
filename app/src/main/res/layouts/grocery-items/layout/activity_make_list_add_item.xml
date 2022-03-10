@@ -18,7 +18,8 @@
         android:gravity="start|top"
         android:hint="@string/grocery_item_hint"
         android:importantForAutofill="no"
-        android:inputType="textMultiLine"
+        android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +33,8 @@
         android:gravity="start|top"
         android:hint="@string/cost_hint"
         android:importantForAutofill="no"
-        android:inputType="textMultiLine"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/text_grocery_item"
         app:layout_constraintStart_toStartOf="@+id/text_grocery_item"
         app:layout_constraintTop_toBottomOf="@+id/text_grocery_item" />
@@ -46,7 +48,8 @@
         android:gravity="start|top"
         android:hint="@string/aisle_hint"
         android:importantForAutofill="no"
-        android:inputType="textMultiLine"
+        android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/text_cost"
         app:layout_constraintStart_toStartOf="@+id/text_cost"
         app:layout_constraintTop_toBottomOf="@+id/text_cost" />

@@ -31,6 +31,7 @@ import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MakeListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -44,6 +45,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
+    private ArrayList mMakeListArray;
 
     private boolean mIsCreated = false;
 
@@ -54,8 +56,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//
-//        setSupportActionBar(binding.toolbar);
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
 
@@ -214,6 +214,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Add or remove from shopping list.
         if (checked) {
             // Add item to shopping list
+            mMakeListArray.add(checked);
             System.out.println(view);
         } else {
             // Remove item from shopping list
@@ -222,8 +223,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
     }
 
-
     public void makeList(View view) {
-
     }
 }

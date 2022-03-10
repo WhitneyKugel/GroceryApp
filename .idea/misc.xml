@@ -18,15 +18,16 @@
         <entry key="app/src/main/res/layout/grocery_item_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/grocery_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/menu_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layouts/grocery-items/layout/activity_make_list.xml" value="0.25785207700101315" />
-        <entry key="app/src/main/res/layouts/grocery-items/layout/activity_make_list_add_item.xml" value="0.25785207700101315" />
+        <entry key="app/src/main/res/layouts/grocery-items/layout/activity_make_list.xml" value="0.2446043165467626" />
+        <entry key="app/src/main/res/layouts/grocery-items/layout/activity_make_list_add_item.xml" value="0.33" />
         <entry key="app/src/main/res/layouts/grocery-items/layout/content_make_list.xml" value="0.25785207700101315" />
-        <entry key="app/src/main/res/layouts/grocery-items/layout/grocery_item_list.xml" value="0.25785207700101315" />
+        <entry key="app/src/main/res/layouts/grocery-items/layout/grocery_item_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layouts/main-menu/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_create_meal.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu_list_add_menu_meal.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/content_menu_item_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layouts/menu-meals/layout/menu_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layouts/menu-meals/layout/menu_item.xml" value="0.5" />
         <entry key="app/src/main/res/menu/menu_grocery_item.xml" value="0.5203703703703704" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.33" />
       </map>
