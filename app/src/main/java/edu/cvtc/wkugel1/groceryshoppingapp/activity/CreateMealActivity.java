@@ -23,7 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
-import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
+import edu.cvtc.wkugel1.groceryshoppingapp.adapters.MenuMealRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeMenuBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
@@ -40,7 +40,7 @@ public class CreateMealActivity extends AppCompatActivity implements LoaderManag
     private GroceryItemsOpenHelper mDbOpenHelper;
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mMenusLayoutManager;
-    private GroceryRecyclerAdapter mMenuRecyclerAdapter;
+    private MenuMealRecyclerAdapter mMenuRecyclerAdapter;
 
     private boolean mIsCreated = false;
 
@@ -77,7 +77,7 @@ public class CreateMealActivity extends AppCompatActivity implements LoaderManag
         List<MenuMealInfo> items = MenuDataManager.getInstance().getMenus();
 
         // We do not have a cursor yet, so pass null.
-        mMenuRecyclerAdapter = new GroceryRecyclerAdapter(this, null);
+        mMenuRecyclerAdapter = new MenuMealRecyclerAdapter(this, null);
 
         // Display the menus
         displayMenus();
