@@ -15,6 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
@@ -337,6 +338,5 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
             saveGroceryItem();
         }
     }
-
 
 }

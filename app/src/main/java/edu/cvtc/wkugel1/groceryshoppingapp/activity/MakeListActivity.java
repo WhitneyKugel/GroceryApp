@@ -28,6 +28,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -45,7 +46,13 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
+    private String mOriginalGroceryItem;
+    private String mOriginalGroceryCost;
+    private String mOriginalGroceryAisle;
     private ArrayList mMakeListArray;
+
+    // Member Objects
+    private Cursor mGroceryItemCursor;
 
     private boolean mIsCreated = false;
 
@@ -206,7 +213,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         mGroceryRecyclerAdapter.changeCursor(groceryItemCursor);
     }
 
-
     public void onCheckBoxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
@@ -214,14 +220,15 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Add or remove from shopping list.
         if (checked) {
             // Add item to shopping list
-            mMakeListArray.add(checked);
-            System.out.println(view);
+
+            System.out.println("Checked");
         } else {
             // Remove item from shopping list
-
+            System.out.println("Unchecked");
         }
 
     }
+
 
     public void makeList(View view) {
     }

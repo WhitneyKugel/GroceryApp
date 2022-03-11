@@ -23,6 +23,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
     private Cursor mCursor;
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
+    private int mGroceryItemAislePosition;
     private int mIdPosition;
 
     public GroceryRecyclerAdapter(Context context, Cursor cursor) {
@@ -40,6 +41,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
             // Get column indexes from mCursor
             mGroceryItemPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
             mGroceryItemCostPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
+            mGroceryItemAislePosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
             mIdPosition = mCursor.getColumnIndex(GroceryItemInfoEntry._ID);
         }
     }
@@ -75,11 +77,13 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         // Get the actual values
         String groceryItem = mCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mCursor.getString(mGroceryItemCostPosition);
+        String groceryItemAisle = mCursor.getString(mGroceryItemAislePosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mGroceryItem.setText(groceryItem);
-        holder.mGroceryCost.setText(groceryItemCost);
+        holder.mGroceryItemCost.setText(groceryItemCost);
+        holder.mGroceryItemAisle.setText(groceryItemAisle);
         holder.mId = id;
     }
 
@@ -93,13 +97,15 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
 
         // Member variables for inner class
         public final TextView mGroceryItem;
-        public final TextView mGroceryCost;
+        public final TextView mGroceryItemCost;
+        public final TextView mGroceryItemAisle;
         public int mId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mGroceryItem = (TextView) itemView.findViewById(R.id.grocery_item_title);
-            mGroceryCost = (TextView) itemView.findViewById(R.id.item_cost);
+            mGroceryItemCost = (TextView) itemView.findViewById(R.id.item_cost);
+            mGroceryItemAisle = (TextView) itemView.findViewById(R.id.item_aisle);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
