@@ -1,6 +1,5 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -238,6 +237,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
 
     public void makeList(View view) {
-
     }
+
 }

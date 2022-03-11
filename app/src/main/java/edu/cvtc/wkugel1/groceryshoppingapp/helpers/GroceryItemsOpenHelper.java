@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.workers.GroceryItemsDataWorker;
 import edu.cvtc.wkugel1.groceryshoppingapp.workers.MenuMealsDataWorker;
 
@@ -24,8 +24,8 @@ public class GroceryItemsOpenHelper extends SQLiteOpenHelper {
         db.execSQL(GroceryItemInfoEntry.SQL_CREATE_TABLE);
         db.execSQL(GroceryItemInfoEntry.SQL_CREATE_INDEX1);
 
-        db.execSQL(GroceryItemDatabaseContract.MealPlannerInfoEntry.SQL_CREATE_TABLE);
-        db.execSQL(GroceryItemDatabaseContract.MealPlannerInfoEntry.SQL_CREATE_INDEX1);
+        db.execSQL(MealPlannerInfoEntry.SQL_CREATE_TABLE);
+        db.execSQL(MealPlannerInfoEntry.SQL_CREATE_INDEX1);
 
         MenuMealsDataWorker menuWorker = new MenuMealsDataWorker(db);
         menuWorker.insertMenuMeals();
