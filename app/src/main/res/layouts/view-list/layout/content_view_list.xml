@@ -19,5 +19,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/grocery_list_item" />
+        tools:listitem="@layout/shopping_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

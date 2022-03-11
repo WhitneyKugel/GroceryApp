@@ -65,7 +65,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mLayoutInflater.inflate(R.layout.grocery_item_list, parent, false);
+        View itemView = mLayoutInflater.inflate(R.layout.grocery_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -112,6 +112,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, GroceryActivity.class);
                     intent.putExtra(GroceryActivity.GROCERY_ITEM_ID, mId);
+                    System.out.println(mGroceryItem.getText().toString());
                     mContext.startActivity(intent);
                 }
             });

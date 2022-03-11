@@ -35,7 +35,10 @@ android {
                         'src/main/res/grocery-items',
                         'src/main/res/layouts/menu-meals',
                         'src/main/res/layouts/grocery-items',
-                        'src/main/res/layouts/main-menu'
+                        'src/main/res/layouts/main-menu', 'src/main/res/layouts/view-list'
+            }
+            resources {
+                srcDirs 'src/main/resources', 'src/main/resources/layouts/view-list', 'src/main/resources/view-list'
             }
         }
     }

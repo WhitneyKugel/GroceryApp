@@ -1,5 +1,6 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,9 +28,12 @@ import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -46,9 +50,9 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
-    private String mOriginalGroceryItem;
-    private String mOriginalGroceryCost;
-    private String mOriginalGroceryAisle;
+    private TextView mOriginalGroceryItem;
+    private TextView mOriginalGroceryCost;
+    private TextView mOriginalGroceryAisle;
     private ArrayList mMakeListArray;
 
     // Member Objects
@@ -214,14 +218,17 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     }
 
     public void onCheckBoxClicked(View view) {
+
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
         // Add or remove from shopping list.
         if (checked) {
             // Add item to shopping list
-
-            System.out.println("Checked");
+            mOriginalGroceryItem = (TextView) view.findViewById(R.id.text_grocery_item);
+            mOriginalGroceryCost = (TextView) view.findViewById(R.id.item_cost);
+            mOriginalGroceryAisle = (TextView) view.findViewById(R.id.item_aisle);
+            System.out.println(mOriginalGroceryItem.getText().toString());
         } else {
             // Remove item from shopping list
             System.out.println("Unchecked");
@@ -231,5 +238,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
 
     public void makeList(View view) {
+
     }
 }
