@@ -15,7 +15,6 @@ import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.activity.GroceryActivity;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 
-
 public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder> {
 
     // Member variables
@@ -25,6 +24,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
     private int mGroceryItemAislePosition;
+    private int mGroceryItemAddToListPosition;
     private int mIdPosition;
 
     public ShoppingListRecyclerAdapter(Context context, Cursor cursor) {
@@ -32,8 +32,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         mCursor = cursor;
         mLayoutInflater = LayoutInflater.from(context);
 
-        // Used to get the positions of the columns we
-        // are interested in.
+        // Used to get the positions of the columns we are interested in.
         populateColumnPositions();
     }
 
@@ -43,6 +42,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
             mGroceryItemPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
             mGroceryItemCostPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
             mGroceryItemAislePosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
+            mGroceryItemAddToListPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST);
             mIdPosition = mCursor.getColumnIndex(GroceryItemInfoEntry._ID);
         }
     }
@@ -65,13 +65,13 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
 
     @NonNull
     @Override
-    public ShoppingListRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mLayoutInflater.inflate(R.layout.shopping_list_item, parent, false);
-        return new ShoppingListRecyclerAdapter.ViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingListRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Move the cursor to the correct row
         mCursor.moveToPosition(position);
 
@@ -79,12 +79,14 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         String groceryItem = mCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mCursor.getString(mGroceryItemAislePosition);
+        int groceryItemAddToList = mCursor.getInt(mGroceryItemAddToListPosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mGroceryItem.setText(groceryItem);
         holder.mGroceryItemCost.setText(groceryItemCost);
         holder.mGroceryItemAisle.setText(groceryItemAisle);
+        holder.mGroceryItemAddToList = groceryItemAddToList;
         holder.mId = id;
     }
 
@@ -94,12 +96,13 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         return mCursor == null ? 0 : mCursor.getCount();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         // Member variables for inner class
         public final TextView mGroceryItem;
         public final TextView mGroceryItemCost;
         public final TextView mGroceryItemAisle;
+        public int mGroceryItemAddToList;
         public int mId;
 
         public ViewHolder(@NonNull View itemView) {

@@ -24,7 +24,8 @@ import edu.cvtc.wkugel1.groceryshoppingapp.adapters.ShoppingListRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityViewListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
-import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryItemDataManager;
+import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryListDataManager;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 
 public class ViewListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityViewListBinding binding;
@@ -58,7 +59,7 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
 
     private void initializeDisplayContent() {
         // Retrieve the information from your database
-        GroceryItemDataManager.loadFromDatabase(mDbOpenHelper);
+        GroceryListDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
         // TODO Change the find view if to better layout
@@ -66,7 +67,7 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         mGroceryItemsLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
-        List<GroceryItemInfo> items = GroceryItemDataManager.getInstance().getGroceryItems();
+        List<GroceryItemInfo> items = GroceryListDataManager.getInstance().getGroceryItems();
 
         // We do not have a cursor yet, so pass null.
         mShoppingListRecyclerAdapter = new ShoppingListRecyclerAdapter(this, null);
@@ -134,17 +135,18 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
 
                     // Create a list of columns you want to return.
                     String[] groceryItemColumns = {
-                            GroceryItemDatabaseContract.GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
-                            GroceryItemDatabaseContract.GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
-                            GroceryItemDatabaseContract.GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
-                            GroceryItemDatabaseContract.GroceryItemInfoEntry._ID
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
+                            GroceryItemInfoEntry._ID
                     };
 
                     // Create an order by field for sorting purposes.
-                    String groceryItemOrderBy = GroceryItemDatabaseContract.GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+                    String groceryItemOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
 
                     // Populate your cursor with the results of the query.
-                    return db.query(GroceryItemDatabaseContract.GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns,
+                    return db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns,
                             null, null, null, null, groceryItemOrderBy);
 
                 }

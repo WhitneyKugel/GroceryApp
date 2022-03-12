@@ -31,11 +31,12 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     public static final String COLUMN_GROCERY_ITEM = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM";
     public static final String COLUMN_GROCERY_ITEM_COST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_COST";
     public static final String COLUMN_GROCERY_ITEM_AISLE = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_AISLE";
+    public static final String COLUMN_GROCERY_ITEM_ADD_TO_LIST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_ADD_TO_LIST";
     private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Initialize new GroceryItemInfo to empty
-    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
+    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "", 0);
 
     // Member variables
     private boolean mIsNewGroceryItem;

@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
-import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 
-public class GroceryItemDataManager {
+public class GroceryListDataManager {
 
-    private static GroceryItemDataManager ourInstance = null;
+    private static GroceryListDataManager ourInstance = null;
     private List<GroceryItemInfo> mGroceryItems = new ArrayList<>();
 
-    public static GroceryItemDataManager getInstance() {
+    public static GroceryListDataManager getInstance() {
         if (ourInstance == null) {
-            ourInstance = new GroceryItemDataManager();
+            ourInstance = new GroceryListDataManager();
         }
         return ourInstance;
     }
@@ -39,7 +39,7 @@ public class GroceryItemDataManager {
 
         // Create an instance of your DataManager and use the DataManager
         // to clear any information from the array list.
-        GroceryItemDataManager dm = getInstance();
+        GroceryListDataManager dm = getInstance();
         dm.mGroceryItems.clear();
 
         // Loop through the cursor rows and add new grocery item objects to
@@ -53,7 +53,9 @@ public class GroceryItemDataManager {
 
             GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
 
-            dm.mGroceryItems.add(list);
+            if (listAddToList == 1) {
+                dm.mGroceryItems.add(list);
+            }
         }
 
         // Close the cursor (to prevent memory leaks)

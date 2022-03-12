@@ -24,6 +24,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
     private int mGroceryItemAislePosition;
+    private int mGroceryItemAddToListPosition;
     private int mIdPosition;
 
     public GroceryRecyclerAdapter(Context context, Cursor cursor) {
@@ -31,8 +32,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         mCursor = cursor;
         mLayoutInflater = LayoutInflater.from(context);
 
-        // Used to get the positions of the columns we
-        // are interested in.
+        // Used to get the positions of the columns we are interested in.
         populateColumnPositions();
     }
 
@@ -42,6 +42,7 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
             mGroceryItemPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
             mGroceryItemCostPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
             mGroceryItemAislePosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
+            mGroceryItemAddToListPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST);
             mIdPosition = mCursor.getColumnIndex(GroceryItemInfoEntry._ID);
         }
     }
@@ -78,12 +79,14 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         String groceryItem = mCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mCursor.getString(mGroceryItemAislePosition);
+//        int groceryItemAddToList = mCursor.getInt(mGroceryItemAddToListPosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mGroceryItem.setText(groceryItem);
         holder.mGroceryItemCost.setText(groceryItemCost);
         holder.mGroceryItemAisle.setText(groceryItemAisle);
+//        holder.mGroceryItemAddToList = groceryItemAddToList;
         holder.mId = id;
     }
 
@@ -93,12 +96,13 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         return mCursor == null ? 0 : mCursor.getCount();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         // Member variables for inner class
         public final TextView mGroceryItem;
         public final TextView mGroceryItemCost;
         public final TextView mGroceryItemAisle;
+        public int mGroceryItemAddToList;
         public int mId;
 
         public ViewHolder(@NonNull View itemView) {

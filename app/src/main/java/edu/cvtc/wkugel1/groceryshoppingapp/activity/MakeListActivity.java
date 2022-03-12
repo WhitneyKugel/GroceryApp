@@ -224,10 +224,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Add or remove from shopping list.
         if (checked) {
             // Add item to shopping list
-            mOriginalGroceryItem = (TextView) view.findViewById(R.id.text_grocery_item);
-            mOriginalGroceryCost = (TextView) view.findViewById(R.id.item_cost);
-            mOriginalGroceryAisle = (TextView) view.findViewById(R.id.item_aisle);
-            System.out.println(mOriginalGroceryItem.getText().toString());
+
         } else {
             // Remove item from shopping list
             System.out.println("Unchecked");
