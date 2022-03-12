@@ -53,9 +53,9 @@ public class GroceryListDataManager {
 
             GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
 
-            if (listAddToList == 1) {
+//            if (listAddToList == 1) {
                 dm.mGroceryItems.add(list);
-            }
+//            }
         }
 
         // Close the cursor (to prevent memory leaks)

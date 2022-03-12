@@ -29,8 +29,9 @@
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu_list_add_menu_meal.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/content_menu_item_list.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/menu_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layouts/view-list/layout/activity_view_list.xml" value="0.25785207700101315" />
         <entry key="app/src/main/res/layouts/view-list/layout/content_view_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layouts/view-list/layout/shopping_list_item.xml" value="0.38229166666666664" />
+        <entry key="app/src/main/res/layouts/view-list/layout/shopping_list_item.xml" value="0.33513513513513515" />
         <entry key="app/src/main/res/menu/menu_grocery_item.xml" value="0.5203703703703704" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.33" />
       </map>

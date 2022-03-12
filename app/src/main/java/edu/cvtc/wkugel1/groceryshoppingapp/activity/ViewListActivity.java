@@ -62,7 +62,6 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         GroceryListDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
-        // TODO Change the find view if to better layout
         mRecyclerItems = (RecyclerView) findViewById(R.id.view_list_items);
         mGroceryItemsLayoutManager = new LinearLayoutManager(this);
 
@@ -94,7 +93,6 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //no inspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

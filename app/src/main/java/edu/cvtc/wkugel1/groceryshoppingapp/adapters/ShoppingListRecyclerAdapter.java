@@ -3,12 +3,14 @@ package edu.cvtc.wkugel1.groceryshoppingapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
@@ -104,20 +106,33 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         public final TextView mGroceryItemAisle;
         public int mGroceryItemAddToList;
         public int mId;
+        public CardView mCardView;
+        public boolean mItemInCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mGroceryItem = (TextView) itemView.findViewById(R.id.list_grocery_item_title);
             mGroceryItemCost = (TextView) itemView.findViewById(R.id.list_item_cost);
             mGroceryItemAisle = (TextView) itemView.findViewById(R.id.list_item_aisle);
+            mCardView = (CardView) itemView.findViewById(R.id.shopping_list_card_view);
+            mItemInCart = false;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, GroceryActivity.class);
-                    intent.putExtra(GroceryActivity.GROCERY_ITEM_ID, mId);
-                    System.out.println(mGroceryItem.getText().toString());
-                    mContext.startActivity(intent);
+                    System.out.println("Make in cart change here");
+                    if (!mItemInCart) {
+                        mItemInCart = true;
+                        mCardView.setCardBackgroundColor(Color.BLUE);
+                    } else {
+                        mItemInCart = false;
+                        mCardView.setCardBackgroundColor(Color.GRAY);
+                    }
+
+//                    Intent intent = new Intent(mContext, GroceryActivity.class);
+//                    intent.putExtra(GroceryActivity.GROCERY_ITEM_ID, mId);
+//                    System.out.println(mGroceryItem.getText().toString());
+//                    mContext.startActivity(intent);
                 }
             });
         }

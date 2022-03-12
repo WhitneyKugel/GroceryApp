@@ -49,10 +49,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
-    private TextView mOriginalGroceryItem;
-    private TextView mOriginalGroceryCost;
-    private TextView mOriginalGroceryAisle;
-    private ArrayList mMakeListArray;
 
     // Member Objects
     private Cursor mGroceryItemCursor;

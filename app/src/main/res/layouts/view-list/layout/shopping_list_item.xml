@@ -8,11 +8,11 @@
     android:backgroundTint="#272121">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/shopping_list_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#555"
-        app:cardBackgroundColor="#555"
+        android:background="#3C3C3C"
+        app:cardBackgroundColor="#3C3C3C"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"

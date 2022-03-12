@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -121,6 +122,22 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
                 }
             });
         }
+    }
+
+    public void onCheckBoxClicked(View view) {
+
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Add or remove from shopping list.
+        if (checked) {
+            // Add item to shopping list
+
+        } else {
+            // Remove item from shopping list
+            System.out.println("Unchecked");
+        }
+
     }
 
 }

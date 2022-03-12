@@ -87,7 +87,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         String groceryItem = mGroceryItemCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mGroceryItemCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mGroceryItemCursor.getString(mGroceryItemAislePosition);
-
+        System.out.println("4815");
         // Use the information to populate the layout.
         mTextGroceryItem.setText(groceryItem);
         mTextGroceryCost.setText(groceryItemCost);
@@ -223,6 +223,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Check to see if the id is for your loader.
         if (id == LOADER_GROCERY_ITEMS) {
             loader = createLoaderGroceryItems();
+            System.out.println("This is the click event.");
         }
         return loader;
     }
@@ -258,6 +259,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         // Check to see if this is your cursor for your loader
         if (loader.getId() == LOADER_GROCERY_ITEMS) {
+            System.out.println("QWERTY: ");
             loadFinishedGroceryItems(data);
         }
     }
@@ -265,16 +267,14 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private void loadFinishedGroceryItems(Cursor data) {
         // Populate your member cursor with the data.
         mGroceryItemCursor = data;
-
         // Get the positions of the fields in the cursor so that
         // you are able to retrieve them into your layout
         mGroceryItemPosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
         mGroceryItemCostPosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
         mGroceryItemAislePosition = mGroceryItemCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
 
-        // Make sure that you have moved to the correct record.
-        // The cursor will not have populated any of the
-        // fields until you move it.
+        // Make sure that you have moved to the correct record. The cursor will not have populated
+        // any of the fields until you move it.
         mGroceryItemCursor.moveToNext();
 
         // Call the method to display the grocery item.
