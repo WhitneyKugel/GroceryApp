@@ -64,7 +64,7 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
 
         mTextMenuMeal = findViewById(R.id.text_meal_item);
 
-        // If it is not a new course, load the course data into the layout
+        // If it is not a new menu meal, load the menu meal data into the layout
         if (!mIsNewMenuMeal) {
             LoaderManager.getInstance(this).initLoader(LOADER_MENU_MEALS, null, this);
         }
@@ -84,7 +84,7 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void saveOriginalMenuMealValues() {
-        // Only save values if you do not have a new course
+        // Only save values if you do not have a new menu meal
         if (!mIsNewMenuMeal) {
             mOriginalMenuMeal = mMenuMeal.getMenuMeal();
         }
@@ -94,10 +94,10 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
         // Get the intent passed into the activity
         Intent intent = getIntent();
 
-        // Get the course id passed into the intent
+        // Get the menu meal id passed into the intent
         mMenuMealId = intent.getIntExtra(MENU_MEAL_ID, ID_NOT_SET);
 
-        // If the course id is not set, create a new course
+        // If the menu meal id is not set, create a new menu meal
         mIsNewMenuMeal = mMenuMealId == ID_NOT_SET;
         if (mIsNewMenuMeal) {
             createNewMenu();
@@ -204,18 +204,18 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
                 // Open a connection to the database
                 SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
 
-                // Build the selection criteria. In this case, you want to set the ID of the course
-                // to the passed-in course id from the Intent.
+                // Build the selection criteria. In this case, you want to set the ID of the menu meal
+                // to the passed-in menu meal id from the Intent.
                 String selection = MealPlannerInfoEntry._ID + " = ?";
                 String[] selectionArgs = {Integer.toString(mMenuMealId)};
 
                 // Create a list of the columns you are pulling from the database
-                String[] courseColumns = {
+                String[] menuMealColumns = {
                         MealPlannerInfoEntry.COLUMN_MEAL_NAME
                 };
 
                 // Fill your cursor with the information you have provided.
-                return db.query(MealPlannerInfoEntry.TABLE_NAME, courseColumns, selection,
+                return db.query(MealPlannerInfoEntry.TABLE_NAME, menuMealColumns, selection,
                         selectionArgs, null,null,null);
             }
         };
@@ -300,9 +300,9 @@ public class MakeMenuActivity extends AppCompatActivity implements LoaderManager
         super.onPause();
         // Did the user cancel the process?
         if (mIsCancelling) {
-            // Is this a new course?
+            // Is this a new menu meal?
             if (mIsNewMenuMeal) {
-                // Delete the new course.
+                // Delete the new menu meal.
                 deleteMenuMealFromDatabase();
             } else {
                 // Put the original values on the screen.

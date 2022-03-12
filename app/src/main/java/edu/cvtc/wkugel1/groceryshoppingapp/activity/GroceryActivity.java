@@ -15,7 +15,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
@@ -77,7 +76,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mTextGroceryAisle = findViewById(R.id.text_aisle);
 
 
-        // If it is not a new course, load the course data into the layout
+        // If it is not a new grocery item, load the grocery item data into the layout
         if (!mIsNewGroceryItem) {
             LoaderManager.getInstance(this).initLoader(LOADER_GROCERY_ITEMS, null, this);
         }
@@ -96,7 +95,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     }
 
     private void saveOriginalGroceryItemValues() {
-        // Only save values if you do not have a new course
+        // Only save values if you do not have a new grocery item
         if (!mIsNewGroceryItem) {
             mOriginalGroceryItem = mGroceryItem.getTitle();
             mOriginalGroceryCost = mGroceryItem.getDescription();
@@ -115,10 +114,10 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Get the intent passed into the activity
         Intent intent = getIntent();
 
-        // Get the course id passed into the intent
+        // Get the grocery item id passed into the intent
         mGroceryItemId = intent.getIntExtra(GROCERY_ITEM_ID, ID_NOT_SET);
 
-        // If the course id is not set, create a new course
+        // If the grocery item id is not set, create a new grocery item
         mIsNewGroceryItem = mGroceryItemId == ID_NOT_SET;
         if (mIsNewGroceryItem) {
             createNewGroceryItem();
@@ -223,32 +222,32 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
 
         // Check to see if the id is for your loader.
         if (id == LOADER_GROCERY_ITEMS) {
-            loader = createLoaderCourses();
+            loader = createLoaderGroceryItems();
         }
         return loader;
     }
 
-    private CursorLoader createLoaderCourses() {
+    private CursorLoader createLoaderGroceryItems() {
         return new CursorLoader(this) {
             @Override
             public Cursor loadInBackground() {
                 // Open a connection to the database
                 SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
 
-                // Build the selection criteria. In this case, you want to set the ID of the course
-                // to the passed-in course id from the Intent.
+                // Build the selection criteria. In this case, you want to set the ID of the grocery item
+                // to the passed-in grocery item id from the Intent.
                 String selection = GroceryItemInfoEntry._ID + " = ?";
                 String[] selectionArgs = {Integer.toString(mGroceryItemId)};
 
                 // Create a list of the columns you are pulling from the database
-                String[] courseColumns = {
+                String[] groceryItemColumns = {
                         GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                         GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
                         GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE
                 };
 
                 // Fill your cursor with the information you have provided.
-                return db.query(GroceryItemInfoEntry.TABLE_NAME, courseColumns, selection,
+                return db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns, selection,
                         selectionArgs, null,null,null);
             }
         };
@@ -326,9 +325,9 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         super.onPause();
         // Did the user cancel the process?
         if (mIsCancelling) {
-            // Is this a new course?
+            // Is this a new grocery item?
             if (mIsNewGroceryItem) {
-                // Delete the new course.
+                // Delete the new grocery item.
                 deleteGroceryItemFromDatabase();
             } else {
                 // Put the original values on the screen.
