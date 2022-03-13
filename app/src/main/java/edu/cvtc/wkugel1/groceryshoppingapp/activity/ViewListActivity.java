@@ -27,13 +27,22 @@ import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryListDataManager;
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 
 public class ViewListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityViewListBinding binding;
 
-    // Constants
+    // Constraints
+    public static final String GROCERY_ITEM_ID = "edu.cvtc.wkugel1.groceryshoppingapp.GROCERY_ITEM_ID";
+    public static final String COLUMN_GROCERY_ITEM = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM";
+    public static final String COLUMN_GROCERY_ITEM_COST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_COST";
+    public static final String COLUMN_GROCERY_ITEM_AISLE = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_AISLE";
+    public static final String COLUMN_GROCERY_ITEM_IN_CART = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_IN_CART";
+    private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
+
+    // Initialize new GroceryListInfo to empty
+    private GroceryListInfo mGroceryListInfo = new GroceryListInfo(0, "", "", "", 0);
 
     // Member variables
     private GroceryItemsOpenHelper mDbOpenHelper;
@@ -137,18 +146,18 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
 
                     // Create a list of columns you want to return.
                     String[] groceryItemColumns = {
-                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
-                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
-                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
-                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
-                            GroceryItemInfoEntry._ID
+                            GroceryListInfoEntry.COLUMN_GROCERY_ITEM,
+                            GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                            GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
+                            GroceryListInfoEntry.COLUMN_GROCERY_ITEM_IN_CART,
+                            GroceryListInfoEntry._ID
                     };
 
                     // Create an order by field for sorting purposes.
-                    String groceryItemOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+                    String groceryItemOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
 
                     // Populate your cursor with the results of the query.
-                    return db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns,
+                    return db.query(GroceryListInfoEntry.TABLE_NAME, groceryItemColumns,
                             null, null, null, null, groceryItemOrderBy);
 
                 }

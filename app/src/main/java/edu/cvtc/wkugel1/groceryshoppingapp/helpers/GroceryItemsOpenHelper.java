@@ -16,7 +16,7 @@ public class GroceryItemsOpenHelper extends SQLiteOpenHelper {
     }
 
     public static final String DATABASE_NAME = "groceryshoppingapp_wkugel1.db";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     @Override
     public void onCreate(SQLiteDatabase db) {

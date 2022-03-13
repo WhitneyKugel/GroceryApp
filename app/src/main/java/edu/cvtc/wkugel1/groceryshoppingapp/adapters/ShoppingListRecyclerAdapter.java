@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.activity.GroceryActivity;
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 
 public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder> {
 
@@ -26,7 +26,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
     private int mGroceryItemAislePosition;
-    private int mGroceryItemAddToListPosition;
+    private int mGroceryItemInCartPosition;
     private int mIdPosition;
 
     public ShoppingListRecyclerAdapter(Context context, Cursor cursor) {
@@ -41,11 +41,11 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
     private void populateColumnPositions() {
         if (mCursor != null) {
             // Get column indexes from mCursor
-            mGroceryItemPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
-            mGroceryItemCostPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST);
-            mGroceryItemAislePosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
-            mGroceryItemAddToListPosition = mCursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST);
-            mIdPosition = mCursor.getColumnIndex(GroceryItemInfoEntry._ID);
+            mGroceryItemPosition = mCursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM);
+            mGroceryItemCostPosition = mCursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST);
+            mGroceryItemAislePosition = mCursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
+            mGroceryItemInCartPosition = mCursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_IN_CART);
+            mIdPosition = mCursor.getColumnIndex(GroceryListInfoEntry._ID);
         }
     }
 
@@ -81,14 +81,14 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         String groceryItem = mCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mCursor.getString(mGroceryItemAislePosition);
-        int groceryItemAddToList = mCursor.getInt(mGroceryItemAddToListPosition);
+        int groceryItemInCartList = mCursor.getInt(mGroceryItemInCartPosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mGroceryItem.setText(groceryItem);
         holder.mGroceryItemCost.setText(groceryItemCost);
         holder.mGroceryItemAisle.setText(groceryItemAisle);
-        holder.mGroceryItemAddToList = groceryItemAddToList;
+        holder.mGroceryItemInCart = groceryItemInCartList;
         holder.mId = id;
     }
 
@@ -104,7 +104,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         public final TextView mGroceryItem;
         public final TextView mGroceryItemCost;
         public final TextView mGroceryItemAisle;
-        public int mGroceryItemAddToList;
+        public int mGroceryItemInCart;
         public int mId;
         public CardView mCardView;
         public boolean mItemInCart;

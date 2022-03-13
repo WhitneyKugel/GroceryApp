@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 
@@ -31,11 +31,11 @@ public class GroceryListDataManager {
         // Retrieve the field positions in your database.
         // The positions of fields may change over time as the database grows,
         // so you want to use your constants to reference where those positions are in the table.
-        int listGroceryItemPosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
-        int listCostPosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM);
-        int listAislePosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
-        int listAddToListPosition = cursor.getColumnIndex(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST);
-        int idPosition = cursor.getColumnIndex(GroceryItemInfoEntry._ID);
+        int listGroceryItemPosition = cursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM);
+        int listCostPosition = cursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM);
+        int listAislePosition = cursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE);
+        int listAddToListPosition = cursor.getColumnIndex(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_IN_CART);
+        int idPosition = cursor.getColumnIndex(GroceryListInfoEntry._ID);
 
         // Create an instance of your DataManager and use the DataManager
         // to clear any information from the array list.
@@ -69,17 +69,17 @@ public class GroceryListDataManager {
 
         // Create a list of columns you want to return.
         String[] groceryItemColumns = {
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
-                GroceryItemInfoEntry._ID};
+                GroceryListInfoEntry.COLUMN_GROCERY_ITEM,
+                GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST,
+                GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
+                GroceryListInfoEntry.COLUMN_GROCERY_ITEM_IN_CART,
+                GroceryListInfoEntry._ID};
 
         // Create an order by field for sorting purposes.
-        String groceryItemOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
+        String groceryItemOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
 
         // Populate your cursor with the results of the query.
-        final Cursor groceryItemCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemColumns,
+        final Cursor groceryItemCursor = db.query(GroceryListInfoEntry.TABLE_NAME, groceryItemColumns,
                 null, null, null, null, groceryItemOrderBy);
 
         // Call the method to load your array list.
