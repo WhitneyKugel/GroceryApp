@@ -41,6 +41,10 @@ import java.util.List;
 public class MakeListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityMakeListBinding binding;
 
+    // Initialize new GroceryItemInfo to empty
+    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "", 0);
+
+
     // Constants
     public static final int LOADER_GROCERY_ITEMS = 0;
 
@@ -52,6 +56,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
     // Member Objects
     private Cursor mGroceryItemCursor;
+    private CheckBox mAddToCart;
 
     private boolean mIsCreated = false;
 
@@ -59,6 +64,8 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_make_list);
+
+        mAddToCart = findViewById(R.id.add_item_checkbox);
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -220,16 +227,19 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Add or remove from shopping list.
         if (checked) {
             // Add item to shopping list
-
+            mGroceryItem.setAddToList(1);
+            System.out.println(mGroceryItem.getAddToList());
         } else {
             // Remove item from shopping list
-            System.out.println("Unchecked");
+            mGroceryItem.setAddToList(0);
+            System.out.println(mGroceryItem.getAddToList());
         }
 
     }
 
-
     public void makeList(View view) {
+
+
     }
 
 }

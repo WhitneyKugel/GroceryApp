@@ -15,6 +15,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
@@ -52,6 +54,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private EditText mTextGroceryItem;
     private EditText mTextGroceryCost;
     private EditText mTextGroceryAisle;
+    private CheckBox mIntegerAddToCart;
     private GroceryItemsOpenHelper mDbOpenHelper;
     private Cursor mGroceryItemCursor;
 
@@ -74,6 +77,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mTextGroceryItem = findViewById(R.id.text_grocery_item);
         mTextGroceryCost = findViewById(R.id.text_cost);
         mTextGroceryAisle = findViewById(R.id.text_aisle);
+        mIntegerAddToCart = findViewById(R.id.add_item_checkbox);
 
 
         // If it is not a new grocery item, load the grocery item data into the layout
@@ -87,7 +91,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         String groceryItem = mGroceryItemCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mGroceryItemCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mGroceryItemCursor.getString(mGroceryItemAislePosition);
-        System.out.println("4815");
+
         // Use the information to populate the layout.
         mTextGroceryItem.setText(groceryItem);
         mTextGroceryCost.setText(groceryItemCost);
@@ -142,7 +146,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         mGroceryItemId = (int)db.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
     }
 
-    private void saveGroceryItemToDatabase(String groceryItem, String groceryItemCost, String groceryItemAisle) {
+    public void saveGroceryItemToDatabase(String groceryItem, String groceryItemCost,
+                                          String groceryItemAisle) {
         // Create selection criteria
         String selection = GroceryItemInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mGroceryItemId)};

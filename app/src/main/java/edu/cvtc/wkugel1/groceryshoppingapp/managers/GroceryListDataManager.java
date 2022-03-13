@@ -8,12 +8,12 @@ import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
-import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 
 public class GroceryListDataManager {
 
     private static GroceryListDataManager ourInstance = null;
-    private List<GroceryItemInfo> mGroceryItems = new ArrayList<>();
+    private List<GroceryListInfo> mGroceryItems = new ArrayList<>();
 
     public static GroceryListDataManager getInstance() {
         if (ourInstance == null) {
@@ -23,7 +23,7 @@ public class GroceryListDataManager {
     }
 
     // Return a list of your grocery items
-    public List<GroceryItemInfo> getGroceryItems() {
+    public List<GroceryListInfo> getGroceryItems() {
         return mGroceryItems;
     }
 
@@ -51,7 +51,7 @@ public class GroceryListDataManager {
             int listAddToList = cursor.getInt(listAddToListPosition);
             int id = cursor.getInt(idPosition);
 
-            GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
+            GroceryListInfo list = new GroceryListInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
 
 //            if (listAddToList == 1) {
                 dm.mGroceryItems.add(list);
@@ -90,7 +90,7 @@ public class GroceryListDataManager {
         // Create an empty grocery item object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
         // size of the new grocery item array list.
-        GroceryItemInfo groceryItem = new GroceryItemInfo(null, null, null, 0);
+        GroceryListInfo groceryItem = new GroceryListInfo(null, null, null, 0);
         mGroceryItems.add(groceryItem);
         return mGroceryItems.size();
     }

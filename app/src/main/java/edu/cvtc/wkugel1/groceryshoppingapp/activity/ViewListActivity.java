@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.adapters.ShoppingListRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityViewListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryListDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 
@@ -39,6 +41,7 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private ShoppingListRecyclerAdapter mShoppingListRecyclerAdapter;
     private boolean mIsCreated = false;
+    private CheckBox mAddToListCheckbox;
 
     // Member Objects
     private Cursor mGroceryItemCursor;
@@ -53,6 +56,7 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         setContentView(binding.getRoot());
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
+//        mAddToListCheckbox = findViewById(R.id.add_item_checkbox);
 
         initializeDisplayContent();
     }
@@ -66,7 +70,7 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         mGroceryItemsLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
-        List<GroceryItemInfo> items = GroceryListDataManager.getInstance().getGroceryItems();
+        List<GroceryListInfo> items = GroceryListDataManager.getInstance().getGroceryItems();
 
         // We do not have a cursor yet, so pass null.
         mShoppingListRecyclerAdapter = new ShoppingListRecyclerAdapter(this, null);
