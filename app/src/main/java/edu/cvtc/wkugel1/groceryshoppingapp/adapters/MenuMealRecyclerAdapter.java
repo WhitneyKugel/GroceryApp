@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
-import edu.cvtc.wkugel1.groceryshoppingapp.activity.GroceryActivity;
-import edu.cvtc.wkugel1.groceryshoppingapp.activity.MakeMenuActivity;
+import edu.cvtc.wkugel1.groceryshoppingapp.activity.AddMenuMealActivity;
 
 public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecyclerAdapter.ViewHolder> {
 
@@ -101,8 +100,8 @@ public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, MakeMenuActivity.class);
-                    intent.putExtra(MakeMenuActivity.MENU_MEAL_ID, mId);
+                    Intent intent = new Intent(mContext, AddMenuMealActivity.class);
+                    intent.putExtra(AddMenuMealActivity.MENU_MEAL_ID, mId);
                     mContext.startActivity(intent);
                 }
             });

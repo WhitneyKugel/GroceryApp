@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryShoppingApp" >
         <activity
-            android:name=".activity.ViewListActivity"
+            android:name=".activity.ViewShoppingListActivity"
             android:exported="true"
             android:label="View List"
             android:parentActivityName=".activity.MainActivity" >
@@ -19,12 +19,12 @@
                 android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.GroceryActivity"
+            android:name=".activity.AddGroceryItemActivity"
             android:label="@string/view_grocery_item_label"
             android:parentActivityName=".activity.MakeListActivity" />
 
         <activity
-            android:name=".activity.CreateMealActivity"
+            android:name=".activity.MakeMealActivity"
             android:exported="true"
             android:label="Create Meal"
             android:parentActivityName=".activity.MainActivity" >
@@ -33,10 +33,10 @@
                 android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.MakeMenuActivity"
+            android:name=".activity.AddMenuMealActivity"
             android:exported="true"
             android:label="Add Meal"
-            android:parentActivityName=".activity.CreateMealActivity" >
+            android:parentActivityName=".activity.MakeMealActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />

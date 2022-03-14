@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchCreateMealActivity(View view) {
 
-        Intent intent = new Intent(this, CreateMealActivity.class);
+        Intent intent = new Intent(this, MakeMealActivity.class);
         startActivity(intent);
 
     }
 
     public void launchViewListsActivity(View view) {
 
-        Intent intent = new Intent(this, ViewListActivity.class);
+        Intent intent = new Intent(this, ViewShoppingListActivity.class);
         startActivity(intent);
 
     }

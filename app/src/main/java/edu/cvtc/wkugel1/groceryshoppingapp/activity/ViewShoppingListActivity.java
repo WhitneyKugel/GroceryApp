@@ -15,57 +15,47 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 
 import java.util.List;
 
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.adapters.ShoppingListRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityViewListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
-import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryListDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 
-public class ViewListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ViewShoppingListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityViewListBinding binding;
 
-    // Constraints
-    public static final String GROCERY_ITEM_ID = "edu.cvtc.wkugel1.groceryshoppingapp.GROCERY_ITEM_ID";
-    public static final String COLUMN_GROCERY_ITEM = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM";
-    public static final String COLUMN_GROCERY_ITEM_COST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_COST";
-    public static final String COLUMN_GROCERY_ITEM_AISLE = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_AISLE";
-    public static final String COLUMN_GROCERY_ITEM_IN_CART = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_IN_CART";
-    private static final int ID_NOT_SET = -1;
-    public static final int LOADER_GROCERY_ITEMS = 0;
-
     // Initialize new GroceryListInfo to empty
-    private GroceryListInfo mGroceryListInfo = new GroceryListInfo(0, "", "", "", 0);
+    private GroceryListInfo mGroceryList = new GroceryListInfo(0, "", "", "", 0);
+
+    // Constants
+    public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Member variables
     private GroceryItemsOpenHelper mDbOpenHelper;
-    private RecyclerView mRecyclerItems;
-    private LinearLayoutManager mGroceryItemsLayoutManager;
+    private RecyclerView mRecyclerListItems;
+    private LinearLayoutManager mGroceryListLayoutManager;
     private ShoppingListRecyclerAdapter mShoppingListRecyclerAdapter;
-    private boolean mIsCreated = false;
-    private CheckBox mAddToListCheckbox;
 
     // Member Objects
     private Cursor mGroceryItemCursor;
-
+    private boolean mIsCreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_list);
+        setContentView(R.layout.content_view_list);
 
         binding = ActivityViewListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
-//        mAddToListCheckbox = findViewById(R.id.add_item_checkbox);
+
+        System.out.println("Loading list....");
 
         initializeDisplayContent();
     }
@@ -75,22 +65,22 @@ public class ViewListActivity extends AppCompatActivity implements LoaderManager
         GroceryListDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
-        mRecyclerItems = (RecyclerView) findViewById(R.id.view_list_items);
-        mGroceryItemsLayoutManager = new LinearLayoutManager(this);
+        mRecyclerListItems = (RecyclerView) findViewById(R.id.view_list_items);
+        mGroceryListLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
-        List<GroceryListInfo> items = GroceryListDataManager.getInstance().getGroceryItems();
+        List<GroceryListInfo> items = GroceryListDataManager.getInstance().getGroceryListItems();
 
         // We do not have a cursor yet, so pass null.
         mShoppingListRecyclerAdapter = new ShoppingListRecyclerAdapter(this, null);
 
         // Display the grocery items
-        displayGroceryItems();
+        displayGroceryListItems();
     }
 
-    private void displayGroceryItems() {
-        mRecyclerItems.setLayoutManager(mGroceryItemsLayoutManager);
-        mRecyclerItems.setAdapter(mShoppingListRecyclerAdapter);
+    private void displayGroceryListItems() {
+        mRecyclerListItems.setLayoutManager(mGroceryListLayoutManager);
+        mRecyclerListItems.setAdapter(mShoppingListRecyclerAdapter);
     }
 
     @Override

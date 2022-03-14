@@ -15,16 +15,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
-public class GroceryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class AddGroceryItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
 
     // Constraints
@@ -43,6 +43,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private boolean mIsNewGroceryItem;
     private boolean mIsCancelling;
     private int mGroceryItemId;
+    private int mGroceryListItemId;
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
     private int mGroceryItemAislePosition;
@@ -56,6 +57,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
     private EditText mTextGroceryAisle;
     private CheckBox mIntegerAddToCart;
     private GroceryItemsOpenHelper mDbOpenHelper;
+    private GroceryItemsOpenHelper mDbOpenListHelper;
     private Cursor mGroceryItemCursor;
 
     @Override
@@ -64,6 +66,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         setContentView(R.layout.activity_make_list_add_item);
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
+        mDbOpenListHelper = new GroceryItemsOpenHelper(this);
+
 
         readDisplayStateValues();
 
@@ -102,7 +106,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Only save values if you do not have a new grocery item
         if (!mIsNewGroceryItem) {
             mOriginalGroceryItem = mGroceryItem.getTitle();
-            mOriginalGroceryCost = mGroceryItem.getDescription();
+            mOriginalGroceryCost = mGroceryItem.getCost();
             mOriginalGroceryAisle = mGroceryItem.getAisle();
         }
     }
@@ -144,10 +148,11 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         // Insert the new row in the database and assign the new id to our member variable
         // for item id. Cast the 'long' return value to an int.
         mGroceryItemId = (int)db.insert(GroceryItemInfoEntry.TABLE_NAME, null, values);
+
     }
 
     public void saveGroceryItemToDatabase(String groceryItem, String groceryItemCost,
-                                          String groceryItemAisle) {
+                                          String groceryItemAisle, int groceryItemAddToList) {
         // Create selection criteria
         String selection = GroceryItemInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mGroceryItemId)};
@@ -157,6 +162,7 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM, groceryItem);
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST, groceryItemCost);
         values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE, groceryItemAisle);
+        values.put(GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST, groceryItemAddToList);
 
         AsyncTaskLoader<String> task = new AsyncTaskLoader<String>(this) {
             @Nullable
@@ -175,9 +181,40 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         task.loadInBackground();
     }
 
+    public void saveGroceryListToDatabase(String groceryItem, String groceryItemCost,
+                                          String groceryItemAisle) {
+        // Create selection criteria
+        String selection = GroceryListInfoEntry._ID + " = ?";
+        String[] selectionArgs = {Integer.toString(mGroceryItemId)};
+
+        // Use a ContentValues object to put our information into.
+        ContentValues values = new ContentValues();
+        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, groceryItem);
+        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, groceryItemCost);
+        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, groceryItemAisle);
+
+        AsyncTaskLoader<String> task = new AsyncTaskLoader<String>(this) {
+            @Nullable
+            @Override
+            public String loadInBackground() {
+                // Get connection to the database. Use the writable method since
+                // we are changing the data.
+                SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+
+                System.out.println("Save to list");
+
+                // Call the update method
+                mGroceryListItemId = (int)db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
+                return null;
+            }
+        };
+
+        task.loadInBackground();
+    }
+
     private void storePreviousGroceryItemValues() {
         mGroceryItem.setTitle(mOriginalGroceryItem);
-        mGroceryItem.setDescription(mOriginalGroceryCost);
+        mGroceryItem.setCost(mOriginalGroceryCost);
         mGroceryItem.setAisle(mOriginalGroceryAisle);
     }
 
@@ -188,7 +225,8 @@ public class GroceryActivity extends AppCompatActivity implements LoaderManager.
         String groceryItemAisle = mTextGroceryAisle.getText().toString();
 
         // Call the method to write to the database
-        saveGroceryItemToDatabase(groceryItem, groceryItemCost, groceryItemAisle);
+        saveGroceryItemToDatabase(groceryItem, groceryItemCost, groceryItemAisle, 0);
+        saveGroceryListToDatabase(groceryItem, groceryItemCost, groceryItemAisle);
     }
 
 

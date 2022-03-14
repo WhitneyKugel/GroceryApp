@@ -37,7 +37,7 @@ public class GroceryItemInfo implements Parcelable{
         return mGroceryItem;
     }
 
-    public String getDescription() {
+    public String getCost() {
         return mCost;
     }
 
@@ -49,7 +49,7 @@ public class GroceryItemInfo implements Parcelable{
         mGroceryItem = title;
     }
 
-    public void setDescription(String description) {
+    public void setCost(String description) {
         mCost = description;
     }
 

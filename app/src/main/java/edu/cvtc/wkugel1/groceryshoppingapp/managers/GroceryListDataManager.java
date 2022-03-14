@@ -13,7 +13,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 public class GroceryListDataManager {
 
     private static GroceryListDataManager ourInstance = null;
-    private List<GroceryListInfo> mGroceryItems = new ArrayList<>();
+    private List<GroceryListInfo> mGroceryList = new ArrayList<>();
 
     public static GroceryListDataManager getInstance() {
         if (ourInstance == null) {
@@ -23,11 +23,11 @@ public class GroceryListDataManager {
     }
 
     // Return a list of your grocery items
-    public List<GroceryListInfo> getGroceryItems() {
-        return mGroceryItems;
+    public List<GroceryListInfo> getGroceryListItems() {
+        return mGroceryList;
     }
 
-    private static void loadGroceryItemsFromDatabase(Cursor cursor) {
+    private static void loadGroceryListFromDatabase(Cursor cursor) {
         // Retrieve the field positions in your database.
         // The positions of fields may change over time as the database grows,
         // so you want to use your constants to reference where those positions are in the table.
@@ -40,7 +40,9 @@ public class GroceryListDataManager {
         // Create an instance of your DataManager and use the DataManager
         // to clear any information from the array list.
         GroceryListDataManager dm = getInstance();
-        dm.mGroceryItems.clear();
+        dm.mGroceryList.clear();
+
+        System.out.println("Loading another");
 
         // Loop through the cursor rows and add new grocery item objects to
         // your array list.
@@ -52,10 +54,9 @@ public class GroceryListDataManager {
             int id = cursor.getInt(idPosition);
 
             GroceryListInfo list = new GroceryListInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
+            System.out.println(list);
+            dm.mGroceryList.add(list);
 
-//            if (listAddToList == 1) {
-                dm.mGroceryItems.add(list);
-//            }
         }
 
         // Close the cursor (to prevent memory leaks)
@@ -68,7 +69,7 @@ public class GroceryListDataManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // Create a list of columns you want to return.
-        String[] groceryItemColumns = {
+        String[] groceryListColumns = {
                 GroceryListInfoEntry.COLUMN_GROCERY_ITEM,
                 GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST,
                 GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
@@ -76,22 +77,22 @@ public class GroceryListDataManager {
                 GroceryListInfoEntry._ID};
 
         // Create an order by field for sorting purposes.
-        String groceryItemOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
+        String groceryListOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
 
         // Populate your cursor with the results of the query.
-        final Cursor groceryItemCursor = db.query(GroceryListInfoEntry.TABLE_NAME, groceryItemColumns,
-                null, null, null, null, groceryItemOrderBy);
+        final Cursor groceryListCursor = db.query(GroceryListInfoEntry.TABLE_NAME, groceryListColumns,
+                null, null, null, null, groceryListOrderBy);
 
         // Call the method to load your array list.
-        loadGroceryItemsFromDatabase(groceryItemCursor);
+        loadGroceryListFromDatabase(groceryListCursor);
     }
 
     public int createNewGroceryItem() {
         // Create an empty grocery item object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
         // size of the new grocery item array list.
-        GroceryListInfo groceryItem = new GroceryListInfo(null, null, null, 0);
-        mGroceryItems.add(groceryItem);
-        return mGroceryItems.size();
+        GroceryListInfo groceryListItem = new GroceryListInfo(null, null, null, 0);
+        mGroceryList.add(groceryListItem);
+        return mGroceryList.size();
     }
 }

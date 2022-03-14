@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,7 +29,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.MenuDataManager;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry;
 
-public class CreateMealActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MakeMealActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityMakeMenuBinding binding;
 
     // Constants
@@ -58,7 +57,7 @@ public class CreateMealActivity extends AppCompatActivity implements LoaderManag
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateMealActivity.this, MakeMenuActivity.class));
+                startActivity(new Intent(MakeMealActivity.this, AddMenuMealActivity.class));
             }
         });
 

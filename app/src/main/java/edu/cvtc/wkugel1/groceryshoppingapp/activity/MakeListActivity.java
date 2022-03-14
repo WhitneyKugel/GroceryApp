@@ -27,15 +27,10 @@ import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MakeListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -76,7 +71,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MakeListActivity.this, GroceryActivity.class));
+                startActivity(new Intent(MakeListActivity.this, AddGroceryItemActivity.class));
             }
         });
 
@@ -163,6 +158,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
                             GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
+                            GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
                             GroceryItemInfoEntry._ID
                     };
 
@@ -205,6 +201,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
                 GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
+                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
                 GroceryItemInfoEntry._ID
         };
 
@@ -238,6 +235,8 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     }
 
     public void makeList(View view) {
+
+
 
 
     }

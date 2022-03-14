@@ -24,7 +24,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.info.MenuMealInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 
-public class MakeMenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AddMenuMealActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     // Constants
     public static final String MENU_MEAL_ID = "edu.cvtc.wkugel1.groceryshoppingapp.MENU_MEAL_ID";

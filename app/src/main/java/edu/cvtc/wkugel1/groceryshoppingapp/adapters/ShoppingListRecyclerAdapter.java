@@ -1,7 +1,6 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
-import edu.cvtc.wkugel1.groceryshoppingapp.activity.GroceryActivity;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 
 public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder> {

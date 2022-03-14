@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
-import edu.cvtc.wkugel1.groceryshoppingapp.activity.GroceryActivity;
+import edu.cvtc.wkugel1.groceryshoppingapp.activity.AddGroceryItemActivity;
 
 public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecyclerAdapter.ViewHolder> {
 
@@ -80,14 +79,14 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         String groceryItem = mCursor.getString(mGroceryItemPosition);
         String groceryItemCost = mCursor.getString(mGroceryItemCostPosition);
         String groceryItemAisle = mCursor.getString(mGroceryItemAislePosition);
-//        int groceryItemAddToList = mCursor.getInt(mGroceryItemAddToListPosition);
+        int groceryItemAddToList = mCursor.getInt(mGroceryItemAddToListPosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mGroceryItem.setText(groceryItem);
         holder.mGroceryItemCost.setText(groceryItemCost);
         holder.mGroceryItemAisle.setText(groceryItemAisle);
-//        holder.mGroceryItemAddToList = groceryItemAddToList;
+        holder.mGroceryItemAddToList = groceryItemAddToList;
         holder.mId = id;
     }
 
@@ -115,29 +114,12 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, GroceryActivity.class);
-                    intent.putExtra(GroceryActivity.GROCERY_ITEM_ID, mId);
-                    System.out.println(mGroceryItem.getText().toString());
+                    Intent intent = new Intent(mContext, AddGroceryItemActivity.class);
+                    intent.putExtra(AddGroceryItemActivity.GROCERY_ITEM_ID, mId);
                     mContext.startActivity(intent);
                 }
             });
         }
-    }
-
-    public void onCheckBoxClicked(View view) {
-
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Add or remove from shopping list.
-        if (checked) {
-            // Add item to shopping list
-
-        } else {
-            // Remove item from shopping list
-            System.out.println("Unchecked");
-        }
-
     }
 
 }

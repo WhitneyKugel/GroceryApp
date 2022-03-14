@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MakeMenuActivity">
+    tools:context=".activity.AddMenuMealActivity">
 
     <EditText
         android:id="@+id/text_meal_item"

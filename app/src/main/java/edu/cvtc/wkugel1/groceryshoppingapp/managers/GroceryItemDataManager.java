@@ -52,7 +52,7 @@ public class GroceryItemDataManager {
             int id = cursor.getInt(idPosition);
 
             GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
-
+            System.out.println(list);
             dm.mGroceryItems.add(list);
         }
 
