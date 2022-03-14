@@ -42,8 +42,6 @@ public class GroceryListDataManager {
         GroceryListDataManager dm = getInstance();
         dm.mGroceryList.clear();
 
-        System.out.println("Loading another");
-
         // Loop through the cursor rows and add new grocery item objects to
         // your array list.
         while (cursor.moveToNext()) {
@@ -54,7 +52,6 @@ public class GroceryListDataManager {
             int id = cursor.getInt(idPosition);
 
             GroceryListInfo list = new GroceryListInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
-            System.out.println(list);
             dm.mGroceryList.add(list);
 
         }

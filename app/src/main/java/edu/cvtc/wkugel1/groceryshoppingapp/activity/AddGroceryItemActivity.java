@@ -15,6 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -23,6 +24,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryIt
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryListInfo;
 
 public class AddGroceryItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -57,7 +59,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     private EditText mTextGroceryAisle;
     private CheckBox mIntegerAddToCart;
     private GroceryItemsOpenHelper mDbOpenHelper;
-    private GroceryItemsOpenHelper mDbOpenListHelper;
     private Cursor mGroceryItemCursor;
 
     @Override
@@ -66,8 +67,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
         setContentView(R.layout.activity_make_list_add_item);
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
-        mDbOpenListHelper = new GroceryItemsOpenHelper(this);
-
 
         readDisplayStateValues();
 
@@ -181,35 +180,35 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
         task.loadInBackground();
     }
 
-    public void saveGroceryListToDatabase(String groceryItem, String groceryItemCost,
-                                          String groceryItemAisle) {
-        // Create selection criteria
-        String selection = GroceryListInfoEntry._ID + " = ?";
-        String[] selectionArgs = {Integer.toString(mGroceryItemId)};
+    public void saveGroceryListToDatabase() {
+        // Get the intent passed into the activity
+//        Intent intent = getIntent();
+//
+//        // Get the grocery list id passed into the intent
+//        mGroceryListItemId = intent.getIntExtra(GROCERY_ITEM_ID, ID_NOT_SET);
+//
+//        // If the grocery item id is not set, create a new grocery item
+//        mIsNewGroceryListItem = mGroceryListItemId == ID_NOT_SET;
+//        if (mIsNewGroceryListItem) {
+            // Create ContentValues object to hold our fields
+            ContentValues values = new ContentValues();
+            mDbOpenHelper = new GroceryItemsOpenHelper(this);
 
-        // Use a ContentValues object to put our information into.
-        ContentValues values = new ContentValues();
-        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, groceryItem);
-        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, groceryItemCost);
-        values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, groceryItemAisle);
+            // For a new grocery item, we don't know what the values will be,
+            // so we set the columns to empty strings.
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, "QWERTY");
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, "1.25");
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, "4");
 
-        AsyncTaskLoader<String> task = new AsyncTaskLoader<String>(this) {
-            @Nullable
-            @Override
-            public String loadInBackground() {
-                // Get connection to the database. Use the writable method since
-                // we are changing the data.
-                SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+            // Get connection to the database. Use the writable method since we are changing the data.
+            SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
 
-                System.out.println("Save to list");
+            // Insert the new row in the database and assign the new id to our member variable
+            // for item id. Cast the 'long' return value to an int.
+            mGroceryListItemId = (int)db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
+//        }
 
-                // Call the update method
-                mGroceryListItemId = (int)db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
-                return null;
-            }
-        };
 
-        task.loadInBackground();
     }
 
     private void storePreviousGroceryItemValues() {
@@ -226,7 +225,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
 
         // Call the method to write to the database
         saveGroceryItemToDatabase(groceryItem, groceryItemCost, groceryItemAisle, 0);
-        saveGroceryListToDatabase(groceryItem, groceryItemCost, groceryItemAisle);
     }
 
 
@@ -266,7 +264,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
         // Check to see if the id is for your loader.
         if (id == LOADER_GROCERY_ITEMS) {
             loader = createLoaderGroceryItems();
-            System.out.println("This is the click event.");
         }
         return loader;
     }
@@ -302,7 +299,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         // Check to see if this is your cursor for your loader
         if (loader.getId() == LOADER_GROCERY_ITEMS) {
-            System.out.println("QWERTY: ");
             loadFinishedGroceryItems(data);
         }
     }

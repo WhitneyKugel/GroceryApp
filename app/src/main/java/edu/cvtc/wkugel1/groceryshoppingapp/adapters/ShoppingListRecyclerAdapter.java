@@ -118,7 +118,6 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Make in cart change here");
                     if (!mItemInCart) {
                         mItemInCart = true;
                         mCardView.setCardBackgroundColor(Color.BLUE);

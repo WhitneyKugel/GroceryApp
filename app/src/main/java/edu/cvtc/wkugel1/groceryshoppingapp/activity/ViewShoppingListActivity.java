@@ -55,8 +55,6 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
 
         mDbOpenHelper = new GroceryItemsOpenHelper(this);
 
-        System.out.println("Loading list....");
-
         initializeDisplayContent();
     }
 

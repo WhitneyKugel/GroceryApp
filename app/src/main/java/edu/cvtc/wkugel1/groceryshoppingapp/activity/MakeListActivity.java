@@ -1,5 +1,6 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryItemDataManager;
@@ -24,6 +27,7 @@ import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryIt
 import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 import edu.cvtc.wkugel1.groceryshoppingapp.adapters.GroceryRecyclerAdapter;
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +52,9 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
+    private AddGroceryItemActivity mAddGroceryItemActivity;
+    private int mGroceryListItemId;
+
 
     // Member Objects
     private Cursor mGroceryItemCursor;
@@ -223,22 +230,35 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
         // Add or remove from shopping list.
         if (checked) {
-            // Add item to shopping list
-            mGroceryItem.setAddToList(1);
-            System.out.println(mGroceryItem.getAddToList());
+            List<GroceryItemInfo> items = GroceryItemDataManager.getInstance().getGroceryItems();
+
+
+
+            // Create ContentValues object to hold our fields
+            ContentValues values = new ContentValues();
+
+            // For a new grocery item, we don't know what the values will be,
+            // so we set the columns to empty strings.
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, String.valueOf(items.get(1).getTitle()));
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, String.valueOf(items.get(1).getCost()));
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, String.valueOf(items.get(1).getAisle()));
+
+            // Get connection to the database. Use the writable method since we are changing the data.
+            SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+
+            // Insert the new row in the database and assign the new id to our member variable
+            // for item id. Cast the 'long' return value to an int.
+            int mGroceryListItemId = (int) db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
+
         } else {
             // Remove item from shopping list
             mGroceryItem.setAddToList(0);
-            System.out.println(mGroceryItem.getAddToList());
+            System.out.println("List: " + mGroceryItem.getAddToList());
         }
 
     }
 
     public void makeList(View view) {
-
-
-
-
     }
 
 }
