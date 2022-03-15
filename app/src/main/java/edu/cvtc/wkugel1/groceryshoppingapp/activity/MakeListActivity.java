@@ -228,7 +228,23 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
 
     public void makeList(View view) {
 
+        ContentValues values = new ContentValues();
+        // Get connection to the database. Use the writable method since we are changing the data.
+        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
 
+        db.execSQL("delete from "+ GroceryListInfoEntry.TABLE_NAME);
+
+        mGroceryRecyclerAdapter.mGroceryItemInfoList.forEach(item -> {
+            // For a new grocery item, we don't know what the values will be,
+            // so we set the columns to empty strings.
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, String.valueOf(item.getTitle()));
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, String.valueOf(item.getCost()));
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, String.valueOf(item.getAisle()));
+
+            // Insert the new row in the database and assign the new id to our member variable
+            // for item id. Cast the 'long' return value to an int.
+            int mGroceryListItemId = (int) db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
+        });
 
     }
 
