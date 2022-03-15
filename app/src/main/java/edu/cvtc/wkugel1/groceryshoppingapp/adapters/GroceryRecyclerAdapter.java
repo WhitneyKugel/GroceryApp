@@ -138,14 +138,12 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
                         mItemInCart = true;
                         mCardView.setCardBackgroundColor(Color.BLUE);
                         mGroceryItemInfoList.add(mGroceryItemInfo);
-                        System.out.println("Item: " + mGroceryItemInfo);
-                        System.out.println("List: " + mGroceryItemInfoList);
+
                     } else {
                         mItemInCart = false;
                         mGroceryItemInfoList.remove(mGroceryItemInfo);
                         mCardView.setCardBackgroundColor(Color.GRAY);
-                        System.out.println("Removed Item: " + mGroceryItemInfo);
-                        System.out.println("Removed List: " + mGroceryItemInfoList);
+
                     }
                 }
             });

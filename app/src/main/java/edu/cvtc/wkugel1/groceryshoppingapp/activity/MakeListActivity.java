@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -69,8 +70,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_make_list);
-
-
 
         binding = ActivityMakeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -246,6 +245,11 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
             int mGroceryListItemId = (int) db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
         });
 
+        Toast.makeText(view.getContext(),
+                "New shopping list created", Toast.LENGTH_LONG).show();
+
+        finish();
+        startActivity(getIntent());
     }
 
 }
