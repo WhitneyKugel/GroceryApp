@@ -3,17 +3,23 @@ package edu.cvtc.wkugel1.groceryshoppingapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryItemInfoEntry;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.activity.AddGroceryItemActivity;
+import edu.cvtc.wkugel1.groceryshoppingapp.info.GroceryItemInfo;
 
 public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecyclerAdapter.ViewHolder> {
 
@@ -26,11 +32,14 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
     private int mGroceryItemAislePosition;
     private int mGroceryItemAddToListPosition;
     private int mIdPosition;
+    public List<GroceryItemInfo> mGroceryItemInfoList;
+
 
     public GroceryRecyclerAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
         mLayoutInflater = LayoutInflater.from(context);
+        mGroceryItemInfoList = new ArrayList<>();
 
         // Used to get the positions of the columns we are interested in.
         populateColumnPositions();
@@ -104,20 +113,53 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
         public final TextView mGroceryItemAisle;
         public int mGroceryItemAddToList;
         public int mId;
+        public boolean mItemInCart;
+        public CardView mCardView;
+        public GroceryItemInfo mGroceryItemInfo;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mGroceryItem = (TextView) itemView.findViewById(R.id.grocery_item_title);
-            mGroceryItemCost = (TextView) itemView.findViewById(R.id.item_cost);
-            mGroceryItemAisle = (TextView) itemView.findViewById(R.id.item_aisle);
+            mGroceryItem = itemView.findViewById(R.id.grocery_item_title);
+            mGroceryItemCost = itemView.findViewById(R.id.item_cost);
+            mGroceryItemAisle = itemView.findViewById(R.id.item_aisle);
+            mCardView = itemView.findViewById(R.id.card_view);
+            mItemInCart = false;
+            mGroceryItemInfo = new GroceryItemInfo("", "", "", 0);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    mGroceryItemInfo = new GroceryItemInfo(0, mGroceryItem.getText().toString(),
+                            mGroceryItemCost.getText().toString(), mGroceryItemAisle.getText().toString(), 0);
+
+                    if (!mItemInCart) {
+                        mItemInCart = true;
+                        mCardView.setCardBackgroundColor(Color.BLUE);
+                        mGroceryItemInfoList.add(mGroceryItemInfo);
+                        System.out.println("Item: " + mGroceryItemInfo);
+                        System.out.println("List: " + mGroceryItemInfoList);
+                    } else {
+                        mItemInCart = false;
+                        mGroceryItemInfoList.remove(mGroceryItemInfo);
+                        mCardView.setCardBackgroundColor(Color.GRAY);
+                        System.out.println("Removed Item: " + mGroceryItemInfo);
+                        System.out.println("Removed List: " + mGroceryItemInfoList);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
                     Intent intent = new Intent(mContext, AddGroceryItemActivity.class);
                     intent.putExtra(AddGroceryItemActivity.GROCERY_ITEM_ID, mId);
                     mContext.startActivity(intent);
+                    return false;
                 }
+
+
             });
         }
     }

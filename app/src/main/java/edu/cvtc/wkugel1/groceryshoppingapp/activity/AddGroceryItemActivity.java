@@ -80,7 +80,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
         mTextGroceryItem = findViewById(R.id.text_grocery_item);
         mTextGroceryCost = findViewById(R.id.text_cost);
         mTextGroceryAisle = findViewById(R.id.text_aisle);
-        mIntegerAddToCart = findViewById(R.id.add_item_checkbox);
 
 
         // If it is not a new grocery item, load the grocery item data into the layout
