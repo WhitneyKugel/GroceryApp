@@ -1,5 +1,6 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -39,12 +40,7 @@ import java.util.List;
 public class MakeListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ActivityMakeListBinding binding;
 
-    // Initialize new GroceryItemInfo to empty
-    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
-
-
     // Constants
-    private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Member variables
@@ -52,14 +48,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mGroceryItemsLayoutManager;
     private GroceryRecyclerAdapter mGroceryRecyclerAdapter;
-    private AddGroceryItemActivity mAddGroceryItemActivity;
     private int mGroceryListItemId;
-
-
-    // Member Objects
-    private Cursor mGroceryItemCursor;
-    private CheckBox mAddToCart;
-
     private boolean mIsCreated = false;
 
     @Override
@@ -114,6 +103,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -207,29 +197,6 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         }
     }
 
-    private void loadGroceryItems() {
-        // Open your database in read mode.
-        SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
-
-        // Create a list of columns you want to return.
-        String[] groceryItemsColumns = {
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_COST,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_AISLE,
-                GroceryItemInfoEntry.COLUMN_GROCERY_ITEM_ADD_TO_LIST,
-                GroceryItemInfoEntry._ID
-        };
-
-        // Create an order by field for sorting purposes.
-        String groceryItemsOrderBy = GroceryItemInfoEntry.COLUMN_GROCERY_ITEM;
-
-        // Populate your cursor with the results of the query.
-        final Cursor groceryItemCursor = db.query(GroceryItemInfoEntry.TABLE_NAME, groceryItemsColumns,
-                null, null, null, null, groceryItemsOrderBy);
-
-        // Associate the cursor with your RecyclerAdapter
-        mGroceryRecyclerAdapter.changeCursor(groceryItemCursor);
-    }
 
     public void makeList(View view) {
 
@@ -237,7 +204,7 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Get connection to the database. Use the writable method since we are changing the data.
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
 
-        db.execSQL("delete from "+ GroceryListInfoEntry.TABLE_NAME);
+        db.execSQL("delete from " + GroceryListInfoEntry.TABLE_NAME);
 
         mGroceryRecyclerAdapter.mGroceryItemInfoList.forEach(item -> {
             // For a new grocery item, we don't know what the values will be,

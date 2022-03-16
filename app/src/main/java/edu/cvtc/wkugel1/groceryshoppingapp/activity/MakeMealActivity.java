@@ -9,6 +9,8 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,11 +18,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.adapters.MenuMealRecyclerAdapter;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeMenuBinding;
@@ -69,7 +73,7 @@ public class MakeMealActivity extends AppCompatActivity implements LoaderManager
         MenuDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
-        mRecyclerItems = (RecyclerView) findViewById(R.id.list_menus);
+        mRecyclerItems = findViewById(R.id.list_menus);
         mMenusLayoutManager = new LinearLayoutManager(this);
 
         // Get your menus
@@ -94,6 +98,7 @@ public class MakeMealActivity extends AppCompatActivity implements LoaderManager
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -184,43 +189,18 @@ public class MakeMealActivity extends AppCompatActivity implements LoaderManager
         }
     }
 
-    private void loadMenus() {
-        // Open your database in read mode.
-        SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
-
-        // Create a list of columns you want to return.
-        String[] menusColumns = {
-                MealPlannerInfoEntry.COLUMN_MEAL_NAME,
-                MealPlannerInfoEntry._ID
-        };
-
-        // Create an order by field for sorting purposes.
-        String menuOrderBy = MealPlannerInfoEntry.COLUMN_MEAL_NAME;
-
-        // Populate your cursor with the results of the query.
-        final Cursor menuCursor = db.query(MealPlannerInfoEntry.TABLE_NAME, menusColumns,
-                null, null, null, null, menuOrderBy);
-
-        // Associate the cursor with your RecyclerAdapter
-        mMenuRecyclerAdapter.changeCursor(menuCursor);
-    }
-
-//    public void onCheckBoxClicked(View view) {
-//        // Is the view now checked?
-//        boolean checked = ((CheckBox) view).isChecked();
-//
-//        // Add or remove from shopping list.
-//        if (checked) {
-//            // Add item to shopping list
-//            System.out.println(view);
-//        } else {
-//            // Remove item from shopping list
-//
-//        }
-//
-//    }
-
     public void makeMenu(View view) {
+        ContentValues values = new ContentValues();
+        // Get connection to the database. Use the writable method since we are changing the data.
+        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+
+        db.execSQL("delete from " + MealPlannerInfoEntry.TABLE_NAME);
+
+        Toast.makeText(view.getContext(),
+                "Meal planner cleared.", Toast.LENGTH_LONG).show();
+
+        finish();
+        startActivity(getIntent());
     }
 
 }

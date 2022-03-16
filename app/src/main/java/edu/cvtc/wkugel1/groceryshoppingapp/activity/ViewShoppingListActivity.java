@@ -9,6 +9,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,7 +66,7 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
         GroceryListDataManager.loadFromDatabase(mDbOpenHelper);
 
         // Set a reference to your list of items layout
-        mRecyclerListItems = (RecyclerView) findViewById(R.id.view_list_items);
+        mRecyclerListItems = findViewById(R.id.view_list_items);
         mGroceryListLayoutManager = new LinearLayoutManager(this);
 
         // Get your grocery items
@@ -90,6 +91,7 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

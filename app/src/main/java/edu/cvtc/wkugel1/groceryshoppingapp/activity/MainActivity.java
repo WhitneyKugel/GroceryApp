@@ -2,6 +2,7 @@ package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,12 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
+import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         setContentView(R.layout.activity_main);
     }
 
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

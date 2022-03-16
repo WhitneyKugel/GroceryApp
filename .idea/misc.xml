@@ -30,7 +30,7 @@
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_create_meal.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu_list_add_menu_meal.xml" value="0.14895833333333333" />
-        <entry key="app/src/main/res/layouts/menu-meals/layout/content_menu_item_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/menu-meals/layout/content_menu_item_list.xml" value="0.33" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/menu_item.xml" value="0.5" />
         <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_home.xml" value="0.16" />
         <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_make_list.xml" value="0.16" />
