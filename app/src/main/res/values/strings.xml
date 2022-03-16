@@ -19,12 +19,18 @@
     <string name="aisle_text">Aisle</string>
     <string name="add_checkbox_text">Add</string>
     <string name="aisle_hint">Aisle</string>
-    <string name="make_list_text">Items</string>
+    <string name="make_list_text">Create Shopping List</string>
     <string name="create_meal_text">Create Meal</string>
-    <string name="view_lists_text">View Lists</string>
+    <string name="view_lists_text">View Shopping Lists</string>
     <string name="make_list">Make List</string>
     <string name="menu_option_text">Menu Option</string>
     <string name="meal_item_hint">Meal item</string>
     <string name="make_menu_text">Make Menu</string>
     <string name="finish_shopping">Finish Shopping</string>
+    <string name="in_cart">In Cart</string>
+    <string name="action_home">Home</string>
+    <string name="action_make_list">Make List</string>
+    <string name="action_view_list">View List</string>
+    <string name="action_make_meal">Make Meal</string>
+    <string name="food_planner_text">Food Planner</string>
 </resources>

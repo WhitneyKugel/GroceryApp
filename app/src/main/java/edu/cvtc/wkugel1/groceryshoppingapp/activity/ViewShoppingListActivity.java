@@ -9,12 +9,14 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -93,12 +95,22 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //no inspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                intent = new Intent(ViewShoppingListActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_make_list:
+                intent = new Intent(ViewShoppingListActivity.this, MakeListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_make_meal:
+                intent = new Intent(ViewShoppingListActivity.this, MakeMealActivity.class);
+                startActivity(intent);
+                return true;
+            default:
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -172,6 +184,14 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
     }
 
     public void completeList(View view) {
-        System.out.println("Complete Shopping Trip");
+        // Get connection to the database. Use the writable method since we are changing the data.
+        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+        db.execSQL("delete from "+ GroceryListInfoEntry.TABLE_NAME);
+
+        Toast.makeText(view.getContext(),
+                "Shopping complete!", Toast.LENGTH_LONG).show();
+
+        finish();
+        startActivity(getIntent());
     }
 }

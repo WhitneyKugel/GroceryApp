@@ -125,14 +125,14 @@ public class GroceryRecyclerAdapter extends RecyclerView.Adapter<GroceryRecycler
             mGroceryItemAisle = itemView.findViewById(R.id.item_aisle);
             mCardView = itemView.findViewById(R.id.card_view);
             mItemInCart = false;
-            mGroceryItemInfo = new GroceryItemInfo("", "", "", 0);
+            mGroceryItemInfo = new GroceryItemInfo("", "", "");
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mGroceryItemInfo = new GroceryItemInfo(0, mGroceryItem.getText().toString(),
-                            mGroceryItemCost.getText().toString(), mGroceryItemAisle.getText().toString(), 0);
+                            mGroceryItemCost.getText().toString(), mGroceryItemAisle.getText().toString());
 
                     if (!mItemInCart) {
                         mItemInCart = true;

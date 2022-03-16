@@ -13,19 +13,17 @@ public class GroceryItemInfo implements Parcelable{
     private int mId;
 
     // Overload Constructors
-    public GroceryItemInfo(String item, String cost, String aisle, int addToList) {
+    public GroceryItemInfo(String item, String cost, String aisle) {
         mGroceryItem = item;
         mCost = cost;
         mAisle = aisle;
-        mAddToList = addToList;
     }
 
-    public GroceryItemInfo(int id, String item, String cost, String aisle, int addToList) {
+    public GroceryItemInfo(int id, String item, String cost, String aisle) {
         mId = id;
         mGroceryItem = item;
         mCost = cost;
         mAisle = aisle;
-        mAddToList = addToList;
     }
 
     // Getters and Setters

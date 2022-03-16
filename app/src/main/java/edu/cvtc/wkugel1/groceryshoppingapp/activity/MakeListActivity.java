@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,15 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
-import androidx.cardview.widget.CardView;
 import androidx.loader.app.LoaderManager;
-import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.databinding.ActivityMakeListBinding;
 import edu.cvtc.wkugel1.groceryshoppingapp.managers.GroceryItemDataManager;
@@ -34,7 +30,6 @@ import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryLi
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,10 +40,11 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
     private ActivityMakeListBinding binding;
 
     // Initialize new GroceryItemInfo to empty
-    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "", 0);
+    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
 
 
     // Constants
+    private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Member variables
@@ -123,11 +119,21 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                intent = new Intent(MakeListActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_view_list:
+                intent = new Intent(MakeListActivity.this, ViewShoppingListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_make_meal:
+                intent = new Intent(MakeListActivity.this, MakeMealActivity.class);
+                startActivity(intent);
+                return true;
+            default:
         }
 
         return super.onOptionsItemSelected(item);
@@ -239,10 +245,11 @@ public class MakeListActivity extends AppCompatActivity implements LoaderManager
             values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, String.valueOf(item.getTitle()));
             values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, String.valueOf(item.getCost()));
             values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, String.valueOf(item.getAisle()));
+            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_IN_CART, "");
 
             // Insert the new row in the database and assign the new id to our member variable
             // for item id. Cast the 'long' return value to an int.
-            int mGroceryListItemId = (int) db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
+            mGroceryListItemId = (int) db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
         });
 
         Toast.makeText(view.getContext(),

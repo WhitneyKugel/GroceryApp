@@ -52,7 +52,7 @@ public class GroceryItemDatabaseContract {
         public static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY, " + COLUMN_GROCERY_ITEM + " TEXT NOT NULL, " +
                 COLUMN_GROCERY_ITEM_COST + " TEXT, " + COLUMN_GROCERY_ITEM_AISLE + " TEXT, "
-                + COLUMN_GROCERY_ITEM_IN_CART + " INTEGER DEFAULT 0)";
+                + COLUMN_GROCERY_ITEM_IN_CART + " TEXT)";
 
     }
 

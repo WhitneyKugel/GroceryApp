@@ -99,11 +99,21 @@ public class MakeMealActivity extends AppCompatActivity implements LoaderManager
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                intent = new Intent(MakeMealActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_view_list:
+                intent = new Intent(MakeMealActivity.this, ViewShoppingListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_make_list:
+                intent = new Intent(MakeMealActivity.this, MakeListActivity.class);
+                startActivity(intent);
+                return true;
+            default:
         }
 
         return super.onOptionsItemSelected(item);

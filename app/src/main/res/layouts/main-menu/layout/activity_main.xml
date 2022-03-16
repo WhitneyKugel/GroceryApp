@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Grocery Shopping"
+        android:text="@string/food_planner_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -25,34 +25,35 @@
         android:id="@+id/items_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="60dp"
         android:onClick="launchMakeListActivity"
         android:text="@string/make_list_text"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/create_meal_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="52dp"
         android:onClick="launchCreateMealActivity"
         android:text="@string/create_meal_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.361"
-        app:layout_constraintStart_toEndOf="@+id/items_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/view_lists_button"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="@+id/view_lists_button"
+        app:layout_constraintTop_toBottomOf="@+id/view_lists_button" />
 
     <Button
         android:id="@+id/view_lists_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginTop="56dp"
         android:onClick="launchViewListsActivity"
         android:text="@string/view_lists_text"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/items_button"
+        app:layout_constraintStart_toStartOf="@+id/items_button"
         app:layout_constraintTop_toBottomOf="@+id/items_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

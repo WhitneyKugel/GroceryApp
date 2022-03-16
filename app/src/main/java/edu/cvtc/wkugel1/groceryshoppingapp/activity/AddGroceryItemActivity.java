@@ -39,7 +39,7 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     public static final int LOADER_GROCERY_ITEMS = 0;
 
     // Initialize new GroceryItemInfo to empty
-    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "", 0);
+    private GroceryItemInfo mGroceryItem = new GroceryItemInfo(0, "", "", "");
 
     // Member variables
     private boolean mIsNewGroceryItem;
@@ -177,37 +177,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
         };
 
         task.loadInBackground();
-    }
-
-    public void saveGroceryListToDatabase() {
-        // Get the intent passed into the activity
-//        Intent intent = getIntent();
-//
-//        // Get the grocery list id passed into the intent
-//        mGroceryListItemId = intent.getIntExtra(GROCERY_ITEM_ID, ID_NOT_SET);
-//
-//        // If the grocery item id is not set, create a new grocery item
-//        mIsNewGroceryListItem = mGroceryListItemId == ID_NOT_SET;
-//        if (mIsNewGroceryListItem) {
-            // Create ContentValues object to hold our fields
-            ContentValues values = new ContentValues();
-            mDbOpenHelper = new GroceryItemsOpenHelper(this);
-
-            // For a new grocery item, we don't know what the values will be,
-            // so we set the columns to empty strings.
-            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM, "QWERTY");
-            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_COST, "1.25");
-            values.put(GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE, "4");
-
-            // Get connection to the database. Use the writable method since we are changing the data.
-            SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
-
-            // Insert the new row in the database and assign the new id to our member variable
-            // for item id. Cast the 'long' return value to an int.
-            mGroceryListItemId = (int)db.insert(GroceryListInfoEntry.TABLE_NAME, null, values);
-//        }
-
-
     }
 
     private void storePreviousGroceryItemValues() {

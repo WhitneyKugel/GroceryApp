@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3962962962962963" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_add_item.xml" value="0.16" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_delete_item.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_create_meal.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.49773550724637683" />
@@ -22,16 +24,21 @@
         <entry key="app/src/main/res/layouts/grocery-items/layout/activity_make_list_add_item.xml" value="0.33" />
         <entry key="app/src/main/res/layouts/grocery-items/layout/content_make_list.xml" value="0.25785207700101315" />
         <entry key="app/src/main/res/layouts/grocery-items/layout/grocery_item_list.xml" value="0.28370786516853935" />
-        <entry key="app/src/main/res/layouts/grocery-items/layout/grocery_list_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/grocery-items/layout/grocery_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layouts/main-menu/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layouts/main-menu/layout/content_main.xml" value="0.23777173913043478" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_create_meal.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/activity_make_menu_list_add_menu_meal.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/content_menu_item_list.xml" value="0.1" />
         <entry key="app/src/main/res/layouts/menu-meals/layout/menu_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_home.xml" value="0.16" />
+        <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_make_list.xml" value="0.16" />
+        <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_make_meal.xml" value="0.16" />
+        <entry key="app/src/main/res/layouts/view-list/drawable-anydpi/ic_view_list.xml" value="0.2085" />
         <entry key="app/src/main/res/layouts/view-list/layout/activity_view_list.xml" value="0.25785207700101315" />
         <entry key="app/src/main/res/layouts/view-list/layout/content_view_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layouts/view-list/layout/shopping_list_item.xml" value="0.33513513513513515" />
+        <entry key="app/src/main/res/layouts/view-list/layout/shopping_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/menu/menu_grocery_item.xml" value="0.5203703703703704" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.33" />
       </map>

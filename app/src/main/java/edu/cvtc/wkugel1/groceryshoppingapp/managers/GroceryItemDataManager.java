@@ -51,7 +51,7 @@ public class GroceryItemDataManager {
             int listAddToList = cursor.getInt(listAddToListPosition);
             int id = cursor.getInt(idPosition);
 
-            GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle, listAddToList);
+            GroceryItemInfo list = new GroceryItemInfo(id, listGroceryItem, listCost, listAisle);
             dm.mGroceryItems.add(list);
         }
 
@@ -87,7 +87,7 @@ public class GroceryItemDataManager {
         // Create an empty grocery item object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
         // size of the new grocery item array list.
-        GroceryItemInfo groceryItem = new GroceryItemInfo(null, null, null, 0);
+        GroceryItemInfo groceryItem = new GroceryItemInfo(null, null, null);
         mGroceryItems.add(groceryItem);
         return mGroceryItems.size();
     }

@@ -1,7 +1,9 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract;
 import edu.cvtc.wkugel1.groceryshoppingapp.R;
 import edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.GroceryListInfoEntry;
+import edu.cvtc.wkugel1.groceryshoppingapp.helpers.GroceryItemsOpenHelper;
 
 public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder> {
 
@@ -26,11 +30,14 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
     private int mGroceryItemAislePosition;
     private int mGroceryItemInCartPosition;
     private int mIdPosition;
+    private GroceryItemsOpenHelper mDbOpenHelper;
 
     public ShoppingListRecyclerAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
         mLayoutInflater = LayoutInflater.from(context);
+        mDbOpenHelper = new GroceryItemsOpenHelper(context);
+
 
         // Used to get the positions of the columns we are interested in.
         populateColumnPositions();
@@ -107,12 +114,19 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         public CardView mCardView;
         public boolean mItemInCart;
 
+        ContentValues values = new ContentValues();
+
+        // Get connection to the database. Use the writable method since we are changing the data.
+        SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mGroceryItem = (TextView) itemView.findViewById(R.id.list_grocery_item_title);
-            mGroceryItemCost = (TextView) itemView.findViewById(R.id.list_item_cost);
-            mGroceryItemAisle = (TextView) itemView.findViewById(R.id.list_item_aisle);
-            mCardView = (CardView) itemView.findViewById(R.id.shopping_list_card_view);
+            mGroceryItem = itemView.findViewById(R.id.list_grocery_item_title);
+            mGroceryItemCost = itemView.findViewById(R.id.list_item_cost);
+            mGroceryItemAisle = itemView.findViewById(R.id.list_item_aisle);
+            mCardView = itemView.findViewById(R.id.shopping_list_card_view);
+//            mItemInCart = itemView.findViewById(R.id.list_in_cart);
             mItemInCart = false;
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -126,10 +140,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
                         mCardView.setCardBackgroundColor(Color.GRAY);
                     }
 
-//                    Intent intent = new Intent(mContext, GroceryActivity.class);
-//                    intent.putExtra(GroceryActivity.GROCERY_ITEM_ID, mId);
-//                    System.out.println(mGroceryItem.getText().toString());
-//                    mContext.startActivity(intent);
+
                 }
             });
         }
