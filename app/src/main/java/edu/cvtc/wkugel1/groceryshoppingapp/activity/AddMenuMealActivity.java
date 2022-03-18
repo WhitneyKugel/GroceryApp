@@ -1,5 +1,8 @@
 package edu.cvtc.wkugel1.groceryshoppingapp.activity;
 
+import static edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry.COLUMN_MEAL_DAY;
+import static edu.cvtc.wkugel1.groceryshoppingapp.GroceryItemDatabaseContract.MealPlannerInfoEntry.COLUMN_MEAL_TYPE;
+
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -33,17 +36,23 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
     public static final int LOADER_MENU_MEALS = 0;
 
     // Initialize new MenuName to empty
-    private MenuMealInfo mMenuMeal = new MenuMealInfo("");
+    private MenuMealInfo mMenuMeal = new MenuMealInfo("", "", "");
 
     // Member Variables
     private boolean mIsNewMenuMeal;
     private boolean mIsCancelling;
     private int mMenuMealId;
     private int mMenuNamePosition;
+    private int mMenuDayPosition;
+    private int mMenuTypePosition;
     private String mOriginalMenuMeal;
+    private String mOriginalMenuDay;
+    private String mOriginalMenuType;
 
     // Member objects
     private EditText mTextMenuMeal;
+    private EditText mTextMenuDay;
+    private EditText mTextMenuType;
     private GroceryItemsOpenHelper mDbOpenHelper;
     private Cursor mMenuMealCursor;
 
@@ -64,6 +73,8 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
         }
 
         mTextMenuMeal = findViewById(R.id.text_meal_item);
+        mTextMenuDay = findViewById(R.id.text_meal_day);
+        mTextMenuType = findViewById(R.id.text_meal_type);
 
         // If it is not a new menu meal, load the menu meal data into the layout
         if (!mIsNewMenuMeal) {
@@ -74,20 +85,28 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
     private void displayMeal() {
         // Retrieve the values from the cursor based upon the position of the columns.
         String menuMeal = mMenuMealCursor.getString(mMenuNamePosition);
+        String menuDay = mMenuMealCursor.getString(mMenuNamePosition);
+        String menuType = mMenuMealCursor.getString(mMenuNamePosition);
 
         // Use the information to populate the layout.
         mTextMenuMeal.setText(menuMeal);
+        mTextMenuDay.setText(menuDay);
+        mTextMenuType.setText(menuType);
     }
 
     private void restoreOriginalMenuMealValues(Bundle savedInstanceState) {
         // Get the original values from the savedInstanceState
         mOriginalMenuMeal = savedInstanceState.getString(COLUMN_MEAL_NAME);
+        mOriginalMenuDay = savedInstanceState.getString(COLUMN_MEAL_DAY);
+        mOriginalMenuType = savedInstanceState.getString(COLUMN_MEAL_TYPE);
     }
 
     private void saveOriginalMenuMealValues() {
         // Only save values if you do not have a new menu meal
         if (!mIsNewMenuMeal) {
             mOriginalMenuMeal = mMenuMeal.getMenuMeal();
+            mOriginalMenuDay = mMenuMeal.getMenuDay();
+            mOriginalMenuType = mMenuMeal.getMenuType();
         }
     }
 
@@ -112,6 +131,8 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
         // For a new menu meal, we don't know what the values will be,
         // so we set the columns to empty strings.
         values.put(MealPlannerInfoEntry.COLUMN_MEAL_NAME, "");
+        values.put(MealPlannerInfoEntry.COLUMN_MEAL_DAY, "");
+        values.put(MealPlannerInfoEntry.COLUMN_MEAL_TYPE, "");
 
         // Get connection to the database. Use the writable method since we are changing the data.
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
@@ -124,12 +145,14 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
     private void saveMenuMeal() {
         // Get the values from the layout
         String menuMeal = mTextMenuMeal.getText().toString();
+        String menuDay = mTextMenuDay.getText().toString();
+        String menuType = mTextMenuType.getText().toString();
 
         // Call the method to write to the database
-        saveMenuMealToDatabase(menuMeal);
+        saveMenuMealToDatabase(menuMeal, menuDay, menuType);
     }
 
-    private void saveMenuMealToDatabase(String menuMeal) {
+    private void saveMenuMealToDatabase(String menuMeal, String menuDay, String menuType) {
         // Create selection criteria
         String selection = MealPlannerInfoEntry._ID + " = ?";
         String[] selectionArgs = {Integer.toString(mMenuMealId)};
@@ -137,6 +160,8 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
         // Use a ContentValues object to put our information into.
         ContentValues values = new ContentValues();
         values.put(MealPlannerInfoEntry.COLUMN_MEAL_NAME, menuMeal);
+        values.put(MealPlannerInfoEntry.COLUMN_MEAL_DAY, menuDay);
+        values.put(MealPlannerInfoEntry.COLUMN_MEAL_TYPE, menuType);
 
         AsyncTaskLoader<String> task = new AsyncTaskLoader<String>(this) {
             @Nullable
@@ -212,7 +237,9 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
 
                 // Create a list of the columns you are pulling from the database
                 String[] menuMealColumns = {
-                        MealPlannerInfoEntry.COLUMN_MEAL_NAME
+                        MealPlannerInfoEntry.COLUMN_MEAL_NAME,
+                        MealPlannerInfoEntry.COLUMN_MEAL_DAY,
+                        MealPlannerInfoEntry.COLUMN_MEAL_TYPE,
                 };
 
                 // Fill your cursor with the information you have provided.
@@ -238,6 +265,8 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
         // Get the positions of the fields in the cursor so that
         // you are able to retrieve them into your layout
         mMenuNamePosition = mMenuMealCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_NAME);
+        mMenuDayPosition = mMenuMealCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_DAY);
+        mMenuTypePosition = mMenuMealCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_TYPE);
 
         // Make sure that you have moved to the correct record.
         // The cursor will not have populated any of the

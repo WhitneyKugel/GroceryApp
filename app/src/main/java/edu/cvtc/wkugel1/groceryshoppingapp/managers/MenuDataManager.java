@@ -31,6 +31,8 @@ public class MenuDataManager {
         // The positions of fields may change over time as the database grows,
         // so you want to use your constants to reference where those positions are in the table.
         int listMenuNamePosition = cursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_NAME);
+        int listMenuDayPosition = cursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_DAY);
+        int listMenuTypePosition = cursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_TYPE);
         int idPosition = cursor.getColumnIndex(MealPlannerInfoEntry._ID);
 
         // Create an instance of your DataManager and use the DataManager
@@ -42,9 +44,11 @@ public class MenuDataManager {
         // your array list.
         while (cursor.moveToNext()) {
             String listMenuName = cursor.getString(listMenuNamePosition);
+            String listMenuDay = cursor.getString(listMenuDayPosition);
+            String listMenuType = cursor.getString(listMenuTypePosition);
             int id = cursor.getInt(idPosition);
 
-            MenuMealInfo list = new MenuMealInfo(id, listMenuName);
+            MenuMealInfo list = new MenuMealInfo(id, listMenuName, listMenuDay, listMenuType);
 
             dm.mMenuNames.add(list);
         }
@@ -61,10 +65,12 @@ public class MenuDataManager {
         // Create a list of columns you want to return.
         String[] menuNameColumns = {
                 MealPlannerInfoEntry.COLUMN_MEAL_NAME,
+                MealPlannerInfoEntry.COLUMN_MEAL_DAY,
+                MealPlannerInfoEntry.COLUMN_MEAL_TYPE,
                 MealPlannerInfoEntry._ID};
 
         // Create an order by field for sorting purposes.
-        String mealNameOrderBy = MealPlannerInfoEntry.COLUMN_MEAL_NAME;
+        String mealNameOrderBy = MealPlannerInfoEntry.COLUMN_MEAL_DAY;
 
         // Populate your cursor with the results of the query.
         final Cursor menuNameCursor = db.query(MealPlannerInfoEntry.TABLE_NAME, menuNameColumns,
@@ -78,7 +84,7 @@ public class MenuDataManager {
         // Create an empty menu object to use on your activity screen
         // when you want a "blank" record to show up. It will return the
         // size of the new menu array list.
-        MenuMealInfo menuMealInfo = new MenuMealInfo((String) null);
+        MenuMealInfo menuMealInfo = new MenuMealInfo(null, null, null);
         mMenuNames.add(menuMealInfo);
         return mMenuNames.size();
     }

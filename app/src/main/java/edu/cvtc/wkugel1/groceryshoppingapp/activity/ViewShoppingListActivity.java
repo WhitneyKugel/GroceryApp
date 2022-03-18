@@ -156,7 +156,7 @@ public class ViewShoppingListActivity extends AppCompatActivity implements Loade
                     };
 
                     // Create an order by field for sorting purposes.
-                    String groceryItemOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
+                    String groceryItemOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE;
 
                     // Populate your cursor with the results of the query.
                     return db.query(GroceryListInfoEntry.TABLE_NAME, groceryItemColumns,

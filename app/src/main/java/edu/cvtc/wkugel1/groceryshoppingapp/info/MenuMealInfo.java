@@ -7,16 +7,22 @@ public class MenuMealInfo implements Parcelable{
 
     // Member Attributes
     private String mMenuMeal;
+    private String mMenuDay;
+    private String mMenuType;
     private int mId;
 
     // Overload Constructors
-    public MenuMealInfo(String meal) {
+    public MenuMealInfo(String meal, String day, String type) {
         mMenuMeal = meal;
+        mMenuDay = day;
+        mMenuType = type;
     }
 
-    public MenuMealInfo(int id, String meal) {
+    public MenuMealInfo(int id, String meal, String day, String type) {
         mId = id;
         mMenuMeal = meal;
+        mMenuDay = day;
+        mMenuType = type;
     }
 
     // Getters and Setters
@@ -28,8 +34,22 @@ public class MenuMealInfo implements Parcelable{
         return mMenuMeal;
     }
 
+    public String getMenuDay() {
+        return mMenuDay;
+    }
+
+    public String getMenuType() {
+        return mMenuType;
+    }
+
     public void setMenuMeal(String menuMeal) {
         mMenuMeal = menuMeal;
+    }
+    public void setMenuDay(String menuDay) {
+        mMenuDay = menuDay;
+    }
+    public void setMenuType(String menuType) {
+        mMenuType = menuType;
     }
 
     private String getCompareKey() {
@@ -57,11 +77,15 @@ public class MenuMealInfo implements Parcelable{
 
     protected MenuMealInfo(Parcel parcel) {
         mMenuMeal = parcel.readString();
+        mMenuDay = parcel.readString();
+        mMenuType = parcel.readString();
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(mMenuMeal);
+        parcel.writeString(mMenuDay);
+        parcel.writeString(mMenuType);
     }
 
     @Override

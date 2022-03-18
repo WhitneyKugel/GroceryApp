@@ -74,7 +74,7 @@ public class GroceryListDataManager {
                 GroceryListInfoEntry._ID};
 
         // Create an order by field for sorting purposes.
-        String groceryListOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM;
+        String groceryListOrderBy = GroceryListInfoEntry.COLUMN_GROCERY_ITEM_AISLE;
 
         // Populate your cursor with the results of the query.
         final Cursor groceryListCursor = db.query(GroceryListInfoEntry.TABLE_NAME, groceryListColumns,

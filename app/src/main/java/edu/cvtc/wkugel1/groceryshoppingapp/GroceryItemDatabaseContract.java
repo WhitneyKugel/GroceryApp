@@ -27,13 +27,16 @@ public class GroceryItemDatabaseContract {
     public static final class MealPlannerInfoEntry implements BaseColumns {
         public static final String TABLE_NAME = "menu_meal_info";
         public static final String COLUMN_MEAL_NAME = "meal_name";
+        public static final String COLUMN_MEAL_DAY = "meal_day";
+        public static final String COLUMN_MEAL_TYPE = "meal_type";
 
         public static final String INDEX1 = TABLE_NAME + "_index1";
         public static final String SQL_CREATE_INDEX1 = "CREATE INDEX " + INDEX1 + " ON " +
                 TABLE_NAME + "(" + COLUMN_MEAL_NAME + ")";
 
         public static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTEGER PRIMARY KEY, " + COLUMN_MEAL_NAME + " TEXT NOT NULL)";
+                _ID + " INTEGER PRIMARY KEY, " + COLUMN_MEAL_NAME + " TEXT NOT NULL, " +
+                COLUMN_MEAL_DAY + " TEXT, " + COLUMN_MEAL_TYPE + " TEXT)";
 
     }
 

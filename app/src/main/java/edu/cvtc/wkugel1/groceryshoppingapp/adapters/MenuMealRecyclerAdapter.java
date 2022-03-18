@@ -23,6 +23,8 @@ public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecycl
     private final LayoutInflater mLayoutInflater;
     private Cursor mCursor;
     private int mMenuMealPosition;
+    private int mMenuDayPosition;
+    private int mMenuTypePosition;
     private int mIdPosition;
 
     public MenuMealRecyclerAdapter(Context context, Cursor cursor) {
@@ -39,6 +41,8 @@ public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecycl
         if (mCursor != null) {
             // Get column indexes from mCursor
             mMenuMealPosition = mCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_NAME);
+            mMenuDayPosition = mCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_DAY);
+            mMenuTypePosition = mCursor.getColumnIndex(MealPlannerInfoEntry.COLUMN_MEAL_TYPE);
             mIdPosition = mCursor.getColumnIndex(MealPlannerInfoEntry._ID);
         }
     }
@@ -73,10 +77,14 @@ public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecycl
 
         // Get the actual values
         String menuMeal = mCursor.getString(mMenuMealPosition);
+        String menuDay = mCursor.getString(mMenuDayPosition);
+        String menuType = mCursor.getString(mMenuTypePosition);
         int id = mCursor.getInt(mIdPosition);
 
         // Pass the information to the holder
         holder.mMenuMeal.setText(menuMeal);
+        holder.mMenuDay.setText(menuDay);
+        holder.mMenuType.setText(menuType);
         holder.mId = id;
 
     }
@@ -91,11 +99,15 @@ public class MenuMealRecyclerAdapter extends RecyclerView.Adapter<MenuMealRecycl
 
         // Member variables for inner class
         public final TextView mMenuMeal;
+        public final TextView mMenuDay;
+        public final TextView mMenuType;
         public int mId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mMenuMeal = (TextView) itemView.findViewById(R.id.menu_option_title);
+            mMenuDay = (TextView) itemView.findViewById(R.id.menu_day_title);
+            mMenuType = (TextView) itemView.findViewById(R.id.menu_meal_type);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -156,11 +156,13 @@ public class MakeMealActivity extends AppCompatActivity implements LoaderManager
                     // Create a list of columns you want to return.
                     String[] menuColumns = {
                             MealPlannerInfoEntry.COLUMN_MEAL_NAME,
+                            MealPlannerInfoEntry.COLUMN_MEAL_DAY,
+                            MealPlannerInfoEntry.COLUMN_MEAL_TYPE,
                             MealPlannerInfoEntry._ID
                     };
 
                     // Create an order by field for sorting purposes.
-                    String menuOrderBy = MealPlannerInfoEntry.COLUMN_MEAL_NAME;
+                    String menuOrderBy = MealPlannerInfoEntry.COLUMN_MEAL_DAY;
 
                     // Populate your cursor with the results of the query.
                     return db.query(MealPlannerInfoEntry.TABLE_NAME, menuColumns,
