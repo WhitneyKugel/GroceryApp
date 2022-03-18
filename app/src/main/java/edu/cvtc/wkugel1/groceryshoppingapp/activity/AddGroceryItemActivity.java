@@ -34,7 +34,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     public static final String COLUMN_GROCERY_ITEM = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM";
     public static final String COLUMN_GROCERY_ITEM_COST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_COST";
     public static final String COLUMN_GROCERY_ITEM_AISLE = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_AISLE";
-    public static final String COLUMN_GROCERY_ITEM_ADD_TO_LIST = "edu.cvtc.wkugel1.groceryshoppingapp.COLUMN_GROCERY_ITEM_ADD_TO_LIST";
     private static final int ID_NOT_SET = -1;
     public static final int LOADER_GROCERY_ITEMS = 0;
 
@@ -45,7 +44,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     private boolean mIsNewGroceryItem;
     private boolean mIsCancelling;
     private int mGroceryItemId;
-    private int mGroceryListItemId;
     private int mGroceryItemPosition;
     private int mGroceryItemCostPosition;
     private int mGroceryItemAislePosition;
@@ -57,7 +55,6 @@ public class AddGroceryItemActivity extends AppCompatActivity implements LoaderM
     private EditText mTextGroceryItem;
     private EditText mTextGroceryCost;
     private EditText mTextGroceryAisle;
-    private CheckBox mIntegerAddToCart;
     private GroceryItemsOpenHelper mDbOpenHelper;
     private Cursor mGroceryItemCursor;
 

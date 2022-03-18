@@ -85,8 +85,8 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
     private void displayMeal() {
         // Retrieve the values from the cursor based upon the position of the columns.
         String menuMeal = mMenuMealCursor.getString(mMenuNamePosition);
-        String menuDay = mMenuMealCursor.getString(mMenuNamePosition);
-        String menuType = mMenuMealCursor.getString(mMenuNamePosition);
+        String menuDay = mMenuMealCursor.getString(mMenuDayPosition);
+        String menuType = mMenuMealCursor.getString(mMenuTypePosition);
 
         // Use the information to populate the layout.
         mTextMenuMeal.setText(menuMeal);
@@ -182,7 +182,7 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
     private void storePreviousMenuMealValues() {
         mMenuMeal.setMenuMeal(mOriginalMenuMeal);
         mMenuMeal.setMenuDay(mOriginalMenuDay);
-        mMenuMeal.setMenuDay(mOriginalMenuType);
+        mMenuMeal.setMenuType(mOriginalMenuType);
 
     }
 
@@ -277,16 +277,7 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
         mMenuMealCursor.moveToNext();
 
         // Call the method to display the meal.
-        displayMenuMeal();
-    }
-
-    private void displayMenuMeal() {
-        // Retrieve the values from the cursor based upon the position of the columns.
-        String menuMeal = mMenuMealCursor.getString(mMenuNamePosition);
-
-        // Use the information to populate the layout.
-        mTextMenuMeal.setText(menuMeal);
-
+        displayMeal();
     }
 
     @Override
