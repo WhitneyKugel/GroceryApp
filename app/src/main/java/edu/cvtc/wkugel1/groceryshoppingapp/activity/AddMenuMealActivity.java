@@ -181,6 +181,9 @@ public class AddMenuMealActivity extends AppCompatActivity implements LoaderMana
 
     private void storePreviousMenuMealValues() {
         mMenuMeal.setMenuMeal(mOriginalMenuMeal);
+        mMenuMeal.setMenuDay(mOriginalMenuDay);
+        mMenuMeal.setMenuDay(mOriginalMenuType);
+
     }
 
     private void deleteMenuMealFromDatabase() {
